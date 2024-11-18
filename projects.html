@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Sarthak Sethi</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Projects</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="skills.html">Skills</a></li>
+        </ul>
+    </nav>
+
+    <section class="container">
+        <!-- Project 1 -->
+        <div class="project">
+            <div class="project-media">
+                <!-- YouTube Video -->
+                <iframe width="320" height="180" src="https://www.youtube.com/embed/VIDEO_ID"
+                    title="Harmony Health Demo" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+
+                <!-- Photo Carousel -->
+                <div class="carousel">
+                    <img src="h1.png" alt="Harmony Health Screenshot 1">
+                    <img src="h2.png" alt="Harmony Health Screenshot 2">
+                    <img src="images/harmony3.jpg" alt="Harmony Health Screenshot 3">
+                </div>
+            </div>
+            <div class="project-details">
+                <h3><a href="https://github.com/1300Sarthak/HarmonyHealth" target="_blank">Harmony Health</a></h3>
+                <p>An AI-powered app to analyze vocal tones and facial expressions, tracking emotional patterns and
+                    mental health conditions.</p>
+            </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project">
+            <div class="project-media">
+                <!-- YouTube Video -->
+                <iframe width="320" height="180" src="https://www.youtube.com/embed/VIDEO_ID" title="SJFit Demo"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+
+                <!-- Photo Carousel -->
+                <div class="carousel">
+                    <img src="images/sjfit1.jpg" alt="SJFit Screenshot 1">
+                    <img src="images/sjfit2.jpg" alt="SJFit Screenshot 2">
+                    <img src="images/sjfit3.jpg" alt="SJFit Screenshot 3">
+                </div>
+            </div>
+            <div class="project-details">
+                <h3><a href="https://github.com/1300Sarthak/SJFit" target="_blank">SJFit</a></h3>
+                <p>A pose estimation app with OpenCV and MediaPipe to improve form detection and provide real-time
+                    feedback.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 Sarthak Sethi. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Carousel Functionality
+        $(document).ready(function () {
+            $('.carousel img:gt(0)').hide();
+
+            setInterval(function () {
+                $('.carousel :first-child').fadeOut()
+                    .next('img').fadeIn()
+                    .end().appendTo('.carousel');
+            }, 3000); // Change image every 3 seconds
+        });
+    </script>
+</body>
+
+</html>
