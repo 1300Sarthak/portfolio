@@ -1,69 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sarthak Sethi - Portfolio</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
-        .gradient-text {
-            background: linear-gradient(45deg, #3B82F6, #3B82F6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .section {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .project-card {
-            transition: all 0.3s ease;
-        }
-
-        .project-card.expanded {
-            transform: scale(1.02);
-        }
-
-        .project-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .project-details.expanded {
-            max-height: 500px;
-        }
-
-        .profile-image {
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body class="bg-gray-50">
-    <!-- Navigation - Simplified -->
+    <!-- Navigation -->
     <nav class="fixed w-full bg-white bg-opacity-90 backdrop-filter backdrop-blur-sm shadow-sm z-50">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="#" class="text-xl font-bold gradient-text">SS</a>
                 <div class="hidden md:flex space-x-8">
                     <a href="#about" class="text-gray-600 hover:text-blue-600">About</a>
+                    <a href="#education" class="text-gray-600 hover:text-blue-600">Education</a>
                     <a href="#experience" class="text-gray-600 hover:text-blue-600">Experience</a>
                     <a href="#projects" class="text-gray-600 hover:text-blue-600">Projects</a>
                     <a href="#skills" class="text-gray-600 hover:text-blue-600">Skills</a>
@@ -72,26 +24,28 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Social Links -->
+    <!-- Hero Section -->
     <section class="pt-32 pb-20 px-6">
         <div class="container mx-auto text-center">
             <h1 class="text-5xl font-bold mb-4 gradient-text">Sarthak Sethi</h1>
             <p class="text-xl text-gray-600 mb-8">Applied Math & Computer Science Student</p>
             <div class="flex justify-center space-x-6">
-                <a href="mailto:sarthakluv@gmail.com" class="text-blue-600 hover:text-blue-800 flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <a href="mailto:sarthakluv@gmail.com" class="text-blue-600 hover:text-blue-800">
+                    <span class="flex items-center"><svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-                    </svg>
-                    Email
+                    </svg>Email</span>
                 </a>
-                <a href="https://github.com/1300Sarthak" target="_blank"
-                    class="text-blue-600 hover:text-blue-800 flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                    </svg>
-                    GitHub
+                <a href="https://github.com/1300Sarthak" target="_blank" class="text-blue-600 hover:text-blue-800">
+                    <span class="flex items-center"><svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/sarsethi/" target="_blank" class="text-blue-600 hover:text-blue-800">
+                    <span class="flex items-center"><svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>LinkedIn</span>
+
                 </a>
                 <a href="https://devpost.com/1300Sarthak/" target="_blank"
                     class="text-blue-600 hover:text-blue-800 flex items-center">
@@ -101,35 +55,18 @@
                     </svg>
                     DevPost
                 </a>
-                <a href="https://www.linkedin.com/in/sarsethi/" target="_blank"
-                    class="text-blue-600 hover:text-blue-800 flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                    </svg>
-                    LinkedIn
-                </a>
             </div>
         </div>
     </section>
 
-    <!-- About Section with Photo -->
-    <section id="about" class="py-20 bg-white">
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-white">
         <div class="container mx-auto px-6 section">
-            <h2 class="text-3xl font-bold mb-8 gradient-text">About Me</h2>
-            <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
-                <div class="w-full md:w-2/3">
-                    <p class="text-gray-600">
-                        Applied Math Computational major at San Jose State University with a passion for AI, machine
-                        learning, and scalable solutions.
-                        Experienced in DSA, OOP, Machine Learning, API security, RESTful APIs, and AI development.
-                        Expected to graduate in May 2026.
-                    </p>
-                </div>
-                <div class="w-full md:w-1/3 flex justify-center">
-                    <img src="/Users/sarthak/Downloads/E6386351-CED1-4062-9E0A-D3A4FE74C5AF.png" alt="Sarthak Sethi"
-                        class="profile-image w-48 h-auto object-cover">
-                </div>
+            <h2 class="text-3xl font-bold mb-8 gradient-text">Education</h2>
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-bold text-gray-800">San Jose State University</h3>
+                <p class="text-blue-600">Bachelor's of Science in Applied Math and Computer Science</p>
+                <p class="text-black-900 mt-2">Expected Graduation: May 2026</p>
             </div>
         </div>
     </section>
@@ -139,62 +76,40 @@
         <div class="container mx-auto px-6 section">
             <h2 class="text-3xl font-bold mb-8 gradient-text">Experience</h2>
             <div class="space-y-8">
+                <!-- ML Research Assistant -->
                 <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold text-gray-800">Software Engineering Intern</h3>
-                    <p class="text-blue-600">Cequence Security · Jan 2025 - Mar 2025</p>
-                    <p class="text-gray-600 mt-2">
-                        • Incoming intern, preparing to contribute to the development and testing of API security
-                        solutions using Java, focusing on enhancing compliance features and strengthening system
-                        security.<br>
-                        • Looking forward to gaining hands-on experience in code reviews, debugging, and quality
-                        assurance processes to better understand API reliability and vulnerability management.<br>
-                        • Excited to collaborate with cross-functional teams to implement best practices in API security
-                        design, while learning from senior developers to build scalable and resilient systems.
-                    </p>
-
+                    <h3 class="text-xl font-bold text-gray-800">Incoming Machine Learning Research Assistant</h3>
+                    <p class="text-blue-600">MICoSys Lab · January 2025</p>
+                    <p class="text-gray-600 mt-2">Machine Intelligence and Complex Systems Research - Spring 2025</p>
                 </div>
 
+                <!-- Cequence Security -->
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold text-gray-800">Incoming Software Engineering Intern</h3>
+                    <p class="text-blue-600">Cequence Security · January 2025 - March 2025</p>
+                    <p class="text-gray-600 mt-2">API Security Development and Testing - Spring 2025</p>
+                </div>
 
-
-
+                <!-- HowToHackathon -->
                 <div class="bg-white p-6 rounded-lg shadow-sm">
                     <h3 class="text-xl font-bold text-gray-800">Project Lead</h3>
-                    <p class="text-blue-600">HowToHackathon · Feb 2024 - Present</p>
-                    <p class="text-gray-600 mt-2">• Led and managed 15+ hackathons with 10,000+ participants, awarding
-                        $500,000+ in prizes, and coordinating with 50+ judges from top universities and Fortune 500
-                        companies.<br>
-                        • Increased participant retention by 15% year-over-year through innovative event engagement
-                        strategies, including personalized participant experiences and effective communication
-                        channels.<br>
-                        • Partnered with Wolfram, Postman, and Desmos, securing sponsorships and maintaining a
-                        newsletter with 100+ weekly readers and a 68% engagement rate.
+                    <p class="text-blue-600">HowToHackathon · February 2024 - Present</p>
+                    <p class="text-gray-600 mt-2">
+                        • Directed 15+ hackathons with 10,000+ participants, awarding $500,000+ in prizes<br>
+                        • Increased participant retention by 15% year-over-year through innovative strategies<br>
+                        • Partnered with Wolfram, Postman, and Desmos, maintaining 68% newsletter engagement rate
                     </p>
                 </div>
 
+                <!-- ACM -->
                 <div class="bg-white p-6 rounded-lg shadow-sm">
                     <h3 class="text-xl font-bold text-gray-800">Director of Outreach</h3>
-                    <p class="text-blue-600">HowToHackathon · December 2023 - Present</p>
-                    <p class="text-gray-600 mt-2">• Spearheaded outreach initiatives, increasing event attendance by
-                        40%, resulting in higher engagement from students, faculty, and industry professionals.<br>
-                        • Secured sponsorships and collaborations by building relationships with companies and industry
-                        leaders, enhancing event quality, and providing valuable resources to members.<br>
-                        • Managed and executed social media campaigns, boosting online engagement by 20%, maintaining a
-                        consistent brand identity, and growing membership by 15%
+                    <p class="text-blue-600">Association for Computing Machinery · December 2023 - Present</p>
+                    <p class="text-gray-600 mt-2">
+                        • Spearheaded outreach initiatives, increasing event attendance by 40%<br>
+                        • Secured sponsorships and collaborations with industry leaders<br>
+                        • Managed social media campaigns, boosting engagement by 20%
                     </p>
-                </div>
-
-
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold text-gray-800">Software Development Educator</h3>
-                    <p class="text-blue-600">Code Ninjas · Jun 2023 - Aug 2024</p>
-                    <p class="text-gray-600 mt-2">• Led instructional sessions for foundational programming concepts to
-                        students aged 3-14, building skills in logic, algorithms, and problem-solving, resulting in a
-                        25% improvement in coding proficiency as measured by assessment scores.<br>
-                        • Designed and implemented customized coding curricula, leveraging the best software development
-                        practices to align with students’ learning objectives, ensuring high engagement and
-                        satisfaction.<br>
-                        • Promoted the Code Ninjas program at 5+ local schools, raising awareness of coding education,
-                        and boosting enrollment by over 15%</p>
                 </div>
             </div>
         </div>
@@ -205,124 +120,68 @@
         <div class="container mx-auto px-6 section">
             <h2 class="text-3xl font-bold mb-8 gradient-text">Projects</h2>
             <div class="grid md:grid-cols-2 gap-6">
-                <!-- Harmony Health -->
-                <div class="project-card bg-gray-50 p-6 rounded-lg cursor-pointer" onclick="toggleProject(this)">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-gray-800">Harmony Health</h3>
-                        <span class="text-blue-600 toggle-icon">+</span>
-                    </div>
-                    <p class="text-blue-600 text-sm">Python, Flask</p>
-                    <p class="text-gray-600 mt-2">AI-powered app for emotional analysis and mental health tracking using
-                        Hume AI API.</p>
-                    <div class="project-details mt-4 hidden">
-                        <hr class="my-4">
-                        <h4 class="font-bold mb-2">Key Features:</h4>
-                        <ul class="list-disc list-inside text-gray-600">
-                            <li>Real-time emotional analysis using Hume AI API</li>
-                            <li>Personalized wellness insights</li>
-                            <li>End-to-End Framework for Production-Ready LLM</li>
-                        </ul>
-                        <h4 class="font-bold mt-4 mb-2">Technical Details:</h4>
-                        <p class="text-gray-600">Built with Python and Flask, incorporating advanced AI algorithms for
-                            emotional pattern recognition.</p>
-                    </div>
-                </div>
                 <!-- SJFit -->
-                <div class="project-card bg-gray-50 p-6 rounded-lg cursor-pointer" onclick="toggleProject(this)">
+                <div class="project-card bg-gray-50 p-6 rounded-lg cursor-pointer">
                     <div class="flex justify-between items-center">
                         <h3 class="text-xl font-bold text-gray-800">SJFit</h3>
                         <span class="text-blue-600 toggle-icon">+</span>
                     </div>
                     <p class="text-blue-600 text-sm">Python, OpenCV, Computer Vision</p>
-                    <p class="text-gray-600 mt-2">Fitness app using MediaPipe for pose estimation and real-time form
-                        analysis.</p>
+                    <p class="text-gray-600 mt-2">2nd Place Winners at Silicon Hacks</p>
                     <div class="project-details mt-4 hidden">
-                        <hr class="my-4">
-                        <h4 class="font-bold mb-2">Key Features:</h4>
-                        <ul class="list-disc list-inside text-gray-600">
-                            <li>Real-time pose estimation</li>
-                            <li>Form correction for optimized fitness training</li>
-                            <li>Built with MediaPipe and OpenCV</li>
-                        </ul>
-                        <h4 class="font-bold mt-4 mb-2">Technical Details:</h4>
-                        <p class="text-gray-600">Developed with Python, leveraging computer vision for accurate body
-                            movement analysis.</p>
+                        <p class="text-gray-600">Developed an app using MediaPipe for pose estimation and CNNs for joint angle analysis, achieving 20% improvement in form detection. Integrated OpenCV for real-time feedback and NumPy for efficient data handling.</p>
                     </div>
                 </div>
+
+                <!-- Harmony Health -->
+                <div class="project-card bg-gray-50 p-6 rounded-lg cursor-pointer">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xl font-bold text-gray-800">Harmony Health</h3>
+                        <span class="text-blue-600 toggle-icon">+</span>
+                    </div>
+                    <p class="text-blue-600 text-sm">Python, Flask</p>
+                    <p class="text-gray-600 mt-2">AI-powered mental health tracking app</p>
+                    <div class="project-details mt-4 hidden">
+                        <p class="text-gray-600">Engineered an AI-powered app using the Hume AI API to analyze vocal tones and facial expressions, tracking emotional patterns and mental health conditions.</p>
+                    </div>
+                </div>
+
                 <!-- Mass Shooting Predictor -->
-                <div class="project-card bg-gray-50 p-6 rounded-lg cursor-pointer" onclick="toggleProject(this)">
+                <div class="project-card bg-gray-50 p-6 rounded-lg cursor-pointer">
                     <div class="flex justify-between items-center">
                         <h3 class="text-xl font-bold text-gray-800">Mass Shooting Predictor</h3>
                         <span class="text-blue-600 toggle-icon">+</span>
                     </div>
                     <p class="text-blue-600 text-sm">Python, Machine Learning</p>
-                    <p class="text-gray-600 mt-2">Predictive model for analyzing U.S. gun violence trends using various
-                        ML algorithms.</p>
+                    <p class="text-gray-600 mt-2">Predictive model for analyzing U.S. gun violence trends</p>
                     <div class="project-details mt-4 hidden">
-                        <hr class="my-4">
-                        <h4 class="font-bold mb-2">Key Features:</h4>
-                        <ul class="list-disc list-inside text-gray-600">
-                            <li>Data analysis and trend prediction</li>
-                            <li>Utilizes machine learning for forecasting</li>
-                            <li>Insights to inform policy decisions</li>
-                        </ul>
-                        <h4 class="font-bold mt-4 mb-2">Technical Details:</h4>
-                        <p class="text-gray-600">Implemented in Python with scikit-learn and pandas for machine learning
-                            and data handling.</p>
+                        <p class="text-gray-600">Developed a predictive model utilizing machine learning algorithms including KNN, Logistic Regression, Decision Trees, and SVMs. Currently integrating Google Maps API for visualization.</p>
                     </div>
                 </div>
-                <!-- EasyCart -->
-                <div class="project-card bg-gray-50 p-6 rounded-lg cursor-pointer" onclick="toggleProject(this)">
+
+                <!-- Study Group Finder -->
+                <div class="project-card bg-gray-50 p-6 rounded-lg cursor-pointer">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-gray-800">EasyCart</h3>
+                        <h3 class="text-xl font-bold text-gray-800">Study Group Finder</h3>
                         <span class="text-blue-600 toggle-icon">+</span>
                     </div>
-                    <p class="text-blue-600 text-sm">MySQL, HTML5, CSS, Python</p>
-                    <p class="text-gray-600 mt-2">Full-stack grocery store application with real-time cart management.
-                    </p>
+                    <p class="text-blue-600 text-sm">HTML5, CSS, JavaScript, React.js, Firebase</p>
+                    <p class="text-gray-600 mt-2">Full-stack study group application</p>
                     <div class="project-details mt-4 hidden">
-                        <hr class="my-4">
-                        <h4 class="font-bold mb-2">Key Features:</h4>
-                        <ul class="list-disc list-inside text-gray-600">
-                            <li>Real-time cart updates</li>
-                            <li>Inventory management system</li>
-                            <li>Clean and responsive user interface</li>
-                        </ul>
-                        <h4 class="font-bold mt-4 mb-2">Technical Details:</h4>
-                        <p class="text-gray-600">Built with MySQL, HTML5, CSS, and Python to create a dynamic,
-                            full-stack application.</p>
+                        <p class="text-gray-600">Currently developing a full-stack web application to connect SJSU students for study groups. Using React.js and Firebase for real-time messaging and course-based group creation.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <script>
-        function toggleProject(projectCard) {
-            const details = projectCard.querySelector('.project-details');
-            const icon = projectCard.querySelector('.toggle-icon');
-
-            // Toggle visibility of details
-            details.classList.toggle('hidden');
-
-            // Toggle "+" to "-" and vice versa
-            icon.textContent = icon.textContent === '+' ? '-' : '+';
-        }
-    </script>
-
-
-
-
-
-
-
-
     <!-- Skills Section -->
     <section id="skills" class="py-20">
         <div class="container mx-auto px-6 section">
             <h2 class="text-3xl font-bold mb-8 gradient-text">Technical Skills</h2>
-            <div class="grid md:grid-cols-3 gap-6">
+            <div class="grid md:grid-cols-4 gap-6">
                 <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-gray
                     <h3 class="font-bold text-gray-800 mb-4">Programming Languages</h3>
                     <p class="text-gray-600">Python, Java, SQL, HTML5, CSS, Javascript</p>
                 </div>
@@ -334,6 +193,10 @@
                     <h3 class="font-bold text-gray-800 mb-4">Developer Tools</h3>
                     <p class="text-gray-600">Jira, Git, Docker, AWS, Linux, Excel</p>
                 </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-gray-800 mb-4">ML & Data Science</h3>
+                    <p class="text-gray-600">TensorFlow, PyTorch, Keras, Scikit-learn</p>
+                </div>
             </div>
         </div>
     </section>
@@ -344,19 +207,7 @@
             <p>© 2024 Sarthak Sethi. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
-
-
-
-<script>
-    function toggleProject(element) {
-        const details = element.querySelector('.project-details');
-        const plusSign = element.querySelector('span');
-
-        element.classList.toggle('expanded');
-        details.classList.toggle('expanded');
-        plusSign.textContent = plusSign.textContent === '+' ? '−' : '+';
-    }
-</script>
-
 </html>
