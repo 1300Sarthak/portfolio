@@ -1,213 +1,448 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Head section remains the same -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarthak Sethi - Portfolio</title>
+    <title>Sarthak Sethi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Previous styles remain the same */
+        body {
+            background-color: #2b2b2b;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 10%;
+            position: relative;
+        }
+
+        .name-container {
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1, .hero h2 {
+            display: inline;
+            font-size: 5rem;
+            font-weight: bold;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .subtext {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            font-weight: lighter;
+            color: #888;
+        }
+
+        .subsubtext {
+            font-size: 0.5rem;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            font-weight: lighter;
+            color: #888;
+        }
+
+        .subsubsubtext {
+            font-size: 0.5rem;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            font-weight: lighter;
+            color: #888;
+        }
+
+        .links {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: right;
+        }
+
+        .links a {
+            display: block;
+            margin: 2rem 0;
+            color: #666;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            padding-right: 1rem;
+        }
+
+        .links a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .devices-container {
+            display: flex;
+            gap: 30px;
+            width: 90%;
+            max-width: 2000px;
+            margin: 50px auto;
+            padding: 0 20px;
+            align-items: flex-start;
+        }
+        
+        /* Media query for mobile devices */
+        @media (max-width: 768px) {
+            .devices-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .iphone-container {
+                flex: none;
+                width: 100%;
+                max-width: 350px;
+                margin: 0 auto 30px auto;
+            }
+            
+            .macbook-container {
+                width: 100%;
+            }
+            
+            .hero h1, .hero h2 {
+                font-size: 3rem; /* Smaller font size for mobile */
+            }
+            
+            .links {
+                position: static;
+                transform: none;
+                text-align: center;
+                margin-top: 2rem;
+            }
+            
+            .links a {
+                display: inline-block;
+                margin: 1rem;
+            }
+        }
+
+        .iphone-container {
+            flex: 0 0 300px;
+            background: #1a1a1a;
+            border-radius: 40px;
+            padding: 15px;
+            position: relative;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .iphone-notch {
+            background: #000;
+            height: 25px;
+            width: 150px;
+            border-radius: 0 0 15px 15px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .iphone-screen {
+            background: #2b2b2b;
+            border-radius: 30px;
+            padding: 20px;
+            height: 600px;
+            overflow-y: auto;
+        }
+
+        .section-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .skill-item {
+            background: #333;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .macbook-container {
+            flex: 1;
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .macbook-top-bar {
+            background: #333;
+            height: 25px;
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .window-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .window-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .close { background: #ff5f56; }
+        .minimize { background: #ffbd2e; }
+        .maximize { background: #27c93f; }
+
+        .macbook-content {
+            background: #2b2b2b;
+            border-radius: 0 0 10px 10px;
+            padding: 20px;
+            height: 600px;
+            overflow-y: auto;
+        }
+
+        .project-card {
+            background: #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .project-tech {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            background: #444;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .macbook-content::-webkit-scrollbar,
+        .iphone-screen::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .macbook-content::-webkit-scrollbar-track,
+        .iphone-screen::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 4px;
+        }
+
+        .macbook-content::-webkit-scrollbar-thumb,
+        .iphone-screen::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 4px;
+        }
+    </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="fixed w-full bg-white bg-opacity-90 backdrop-filter backdrop-blur-sm shadow-sm z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <a href="#" class="text-xl font-bold gradient-text">SS</a>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="text-gray-600 hover:text-blue-600">About</a>
-                    <a href="#education" class="text-gray-600 hover:text-blue-600">Education</a>
-                    <a href="#experience" class="text-gray-600 hover:text-blue-600">Experience</a>
-                    <a href="#projects" class="text-gray-600 hover:text-blue-600">Projects</a>
-                    <a href="#skills" class="text-gray-600 hover:text-blue-600">Skills</a>
-                </div>
-            </div>
+<body>
+    <section class="hero">
+        <div class="name-container">
+            <h1>Sarthak Sethi</h1>
         </div>
-    </nav>
+        <p class="subtext">Applied Math & Computer Science Student</p>
+        <p class="subsubtext">At San Jose State University</p>
 
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-6">
-        <div class="container mx-auto text-center">
-            <h1 class="text-5xl font-bold mb-4 gradient-text">Sarthak Sethi</h1>
-            <p class="text-xl text-gray-600 mb-8">Applied Math & Computer Science Student</p>
-            <div class="flex justify-center space-x-6">
-                <a href="mailto:sarthakluv@gmail.com" class="text-blue-600 hover:text-blue-800">
-                    <span class="flex items-center"><svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-                    </svg>Email</span>
-                </a>
-                <a href="https://github.com/1300Sarthak" target="_blank" class="text-blue-600 hover:text-blue-800">
-                    <span class="flex items-center"><svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>GitHub</span>
-                </a>
-                <a href="https://www.linkedin.com/in/sarsethi/" target="_blank" class="text-blue-600 hover:text-blue-800">
-                    <span class="flex items-center"><svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>LinkedIn</span>
-
-                </a>
-                <a href="https://devpost.com/1300Sarthak/" target="_blank"
-                    class="text-blue-600 hover:text-blue-800 flex items-center">
-                    <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M6.002 1.61L0 12.004L6.002 22.39h11.996L24 12.004L17.998 1.61zm1.593 4.084h3.947c3.605 0 6.276 1.695 6.276 6.31c0 4.436-3.21 6.302-6.456 6.302H7.595zm2.517 2.449v7.714h1.241c2.646 0 3.862-1.55 3.862-3.861c0-2.311-1.216-3.853-3.862-3.853z" />
-                    </svg>
-                    DevPost
-                </a>
-            </div>
+        <div class="links">
+            <a href="Resume/Resume.pdf" target="_blank">Resume</a>
+            <a href="mailto:sarthakluv@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/sarsethi/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/1300Sarthak" target="_blank">GitHub</a>
+            <a href="https://devpost.com/1300Sarthak" target="_blank">DevPost</a>
         </div>
     </section>
 
-    <!-- Education Section -->
-    <section id="education" class="py-20 bg-white">
-        <div class="container mx-auto px-6 section">
-            <h2 class="text-3xl font-bold mb-8 gradient-text">Education</h2>
-            <div class="bg-white p-6 rounded-lg shadow-sm">
-                <h3 class="text-xl font-bold text-gray-800">San Jose State University</h3>
-                <p class="text-blue-600">Bachelor's of Science in Applied Math and Computer Science</p>
-                <p class="text-black-900 mt-2">Expected Graduation: May 2026</p>
+    <div class="devices-container">
+        <!-- iPhone - Skills -->
+        <div class="iphone-container">
+            <div class="iphone-notch"></div>
+            <div class="iphone-screen">
+                <h2 class="section-header">Skills</h2>
+                <div class="skill-item">
+                    <h3 class="font-bold text-lg mb-2">Languages:</h3>
+                    <p>Python, Java, SQL, HTML5, CSS, Javscript</p>
+                </div>
+                <div class="skill-item">
+                    <h3 class="font-bold text-lg mb-2">Frameworks:</h3>
+                    <p>SciPy, NumPy, Pandas, Scikit-learn, Flask, ReactJS</p>
+                </div>
+                <div class="skill-item">
+                    <h3 class="font-bold text-lg mb-2">Tools:</h3>
+                    <p>Jira, Git, Docker, AWS, Linux, Excel</p>
+                </div>
+                <div class="skill-item">
+                    <h3 class="font-bold text-lg mb-2">Machine Learning:</h3>
+                    <p>TensorFlow, PyTorch, Keras, Scikit-learn</p>
+                </div>
             </div>
         </div>
-    </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="py-20">
-        <div class="container mx-auto px-6 section">
-            <h2 class="text-3xl font-bold mb-8 gradient-text">Experience</h2>
-            <div class="space-y-8">
-                <!-- ML Research Assistant -->
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold text-gray-800">Incoming Machine Learning Research Assistant</h3>
-                    <p class="text-blue-600">MICoSys Lab · January 2025</p>
-                    <p class="text-gray-600 mt-2">Machine Intelligence and Complex Systems Research - Spring 2025</p>
+        <!-- MacBook - Projects -->
+        <div class="macbook-container">
+            <div class="macbook-top-bar">
+                <div class="window-buttons">
+                    <div class="window-button close"></div>
+                    <div class="window-button minimize"></div>
+                    <div class="window-button maximize"></div>
                 </div>
-
-                <!-- Cequence Security -->
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold text-gray-800">Incoming Software Engineering Intern</h3>
-                    <p class="text-blue-600">Cequence Security · January 2025 - March 2025</p>
-                    <p class="text-gray-600 mt-2">API Security Development and Testing - Spring 2025</p>
-                </div>
-
-                <!-- HowToHackathon -->
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold text-gray-800">Project Lead</h3>
-                    <p class="text-blue-600">HowToHackathon · February 2024 - Present</p>
-                    <p class="text-gray-600 mt-2">
-                        • Directed 15+ hackathons with 10,000+ participants, awarding $500,000+ in prizes<br>
-                        • Increased participant retention by 15% year-over-year through innovative strategies<br>
-                        • Partnered with Wolfram, Postman, and Desmos, maintaining 68% newsletter engagement rate
+            </div>
+            <div class="macbook-content">
+                <h2 class="section-header">Recent Projects</h2>
+                <!-- Rest of the project cards remain the same -->
+                <a href="https://github.com/1300Sarthak/SJFIT" class="project-card" target="_blank" rel="noopener noreferrer">
+                    <h3 class="project-title">SJFit</h3>
+                    <p class="project-description">
+                        Developed an app using MediaPipe for pose estimation and CNNs for joint angle analysis, 
+                        achieving 20% improvement in form detection. Integrated OpenCV for real-time feedback and
+                        NumPy for efficient data handling. Achieved 95% accuracy in tracking exercises like squats and curls, providing real-time performance analysis, won 2nd place at Silicon Hacks for this innovative project.
                     </p>
-                </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">OpenCV</span>
+                        <span class="tech-tag">MediaPipe</span>
+                        <span class="tech-tag">Computer Vision</span>
+                    </div>
+                </a>
 
-                <!-- ACM -->
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold text-gray-800">Director of Outreach</h3>
-                    <p class="text-blue-600">Association for Computing Machinery · December 2023 - Present</p>
-                    <p class="text-gray-600 mt-2">
-                        • Spearheaded outreach initiatives, increasing event attendance by 40%<br>
-                        • Secured sponsorships and collaborations with industry leaders<br>
-                        • Managed social media campaigns, boosting engagement by 20%
+                <a href="https://github.com/1300Sarthak/HarmonyHealth" class="project-card" target="_blank" rel="noopener noreferrer">
+                    <h3 class="project-title">Harmony Health</h3>
+                    <p class="project-description">
+                        Engineered an AI-powered app using the Hume AI API to analyze vocal tones and facial expressions,
+                        tracking emotional patterns and mental health conditions. Integrated an End-to-End Framework for 
+                        Production-Ready LLM to deliver personalized wellness insights and real-time emotional analysis.
                     </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Flask</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/1300Sarthak/MassShootingPredictor" class="project-card" target="_blank" rel="noopener noreferrer">
+                    <h3 class="project-title">Mass Shooting Predictor</h3>
+                    <p class="project-description">
+                        Developed a predictive model to analyze and forecast U.S. gun violence trends,
+                        utilizing machine learning algorithms including KNN, Logistic Regression, Decision Trees, 
+                        and SVMs. Currently working on integrating the Google Maps API to visualize high-risk areas, 
+                        providing actionable insights for targeted safety interventions.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Machine Learning</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/yourusername/study-group" class="project-card" target="_blank" rel="noopener noreferrer">
+                    <h3 class="project-title">Study Group</h3>
+                    <p class="project-description">
+                        Currently developing a full-stack web application to connect SJSU students for study groups. 
+                        Using HTML/CSS/JS for the front-end and React.js for dynamic functionality. Progressing towards 
+                        integrating Firebase for user authentication and database management. The app will feature real-time 
+                        messaging, course-based group creation, and availability sharing, with a focus on user-friendly design 
+                        and seamless collaboration. Beta deploying Jan 2025
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Firebase</span>
+                    </div>
+                </a>
+
+
+                <a href="https://uzz-converter.vercel.app/" class="project-card" target="_blank" rel="noopener noreferrer">
+                        <h3 class="project-title">Uzz-ify</h3>
+                        <p class="project-description">
+                            With words such as "huzz" and "bruzz" becoming words that generations such as Gen 
+                            Alpha, and Gen Z, use, becoming an integral part of our modern day life. I decided 
+                            to created a website so that people convert your words,phrases, or even sentences into 
+                            the lanaguge of a Gen Z/Alpha person.
+                        </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                </a>
+
+
+
+                <a href="https://github.com/1300Sarthak/amulanssi" class="project-card" target="_blank" rel="noopener noreferrer">
+                    <h3 class="project-title">Amulanssi</h3>
+                    <p class="project-description">
+                        Amulanssi is a semi-autonomous, voice-controlled ambulance that responds to basic voice commands and 
+                        navigates with minimal human intervention. The goal is to make it fully autonomous, allowing users 
+                        to "call" it for emergency medical assistance. Helping solve the problem of extremely expensive albumance services
+                        within the United States.
+                    </p>
+                <div class="project-tech">
+                    <span class="tech-tag">Arudino</span>
+                    <span class="tech-tag">C++</span>
                 </div>
+            </a>
+
+                <a href="https://github.com/1300Sarthak/Slue" class="project-card" target="_blank" rel="noopener noreferrer">
+                    <h3 class="project-title">Slue</h3>
+                    <p class="project-description">
+                        Slue is an automatic watering solution designed to keep your plants healthy even when you're away. 
+                        By measuring soil moisture and plant nutrients, SLUE waters your plants only when necessary, ensuring optimal care.
+                    </p>
+                <div class="project-tech">
+                    <span class="tech-tag">Arudino</span>
+                    <span class="tech-tag">C++</span>
+                </div>
+            </a>
+
+
+
+
+
+
+
+
+
             </div>
         </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-white">
-        <div class="container mx-auto px-6 section">
-            <h2 class="text-3xl font-bold mb-8 gradient-text">Projects</h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- SJFit -->
-                <div class="project-card bg-gray-50 p-6 rounded-lg cursor-pointer">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-gray-800">SJFit</h3>
-                        <span class="text-blue-600 toggle-icon">+</span>
-                    </div>
-                    <p class="text-blue-600 text-sm">Python, OpenCV, Computer Vision</p>
-                    <p class="text-gray-600 mt-2">2nd Place Winners at Silicon Hacks</p>
-                    <div class="project-details mt-4 hidden">
-                        <p class="text-gray-600">Developed an app using MediaPipe for pose estimation and CNNs for joint angle analysis, achieving 20% improvement in form detection. Integrated OpenCV for real-time feedback and NumPy for efficient data handling.</p>
-                    </div>
-                </div>
-
-                <!-- Harmony Health -->
-                <div class="project-card bg-gray-50 p-6 rounded-lg cursor-pointer">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-gray-800">Harmony Health</h3>
-                        <span class="text-blue-600 toggle-icon">+</span>
-                    </div>
-                    <p class="text-blue-600 text-sm">Python, Flask</p>
-                    <p class="text-gray-600 mt-2">AI-powered mental health tracking app</p>
-                    <div class="project-details mt-4 hidden">
-                        <p class="text-gray-600">Engineered an AI-powered app using the Hume AI API to analyze vocal tones and facial expressions, tracking emotional patterns and mental health conditions.</p>
-                    </div>
-                </div>
-
-                <!-- Mass Shooting Predictor -->
-                <div class="project-card bg-gray-50 p-6 rounded-lg cursor-pointer">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-gray-800">Mass Shooting Predictor</h3>
-                        <span class="text-blue-600 toggle-icon">+</span>
-                    </div>
-                    <p class="text-blue-600 text-sm">Python, Machine Learning</p>
-                    <p class="text-gray-600 mt-2">Predictive model for analyzing U.S. gun violence trends</p>
-                    <div class="project-details mt-4 hidden">
-                        <p class="text-gray-600">Developed a predictive model utilizing machine learning algorithms including KNN, Logistic Regression, Decision Trees, and SVMs. Currently integrating Google Maps API for visualization.</p>
-                    </div>
-                </div>
-
-                <!-- Study Group Finder -->
-                <div class="project-card bg-gray-50 p-6 rounded-lg cursor-pointer">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-gray-800">Study Group Finder</h3>
-                        <span class="text-blue-600 toggle-icon">+</span>
-                    </div>
-                    <p class="text-blue-600 text-sm">HTML5, CSS, JavaScript, React.js, Firebase</p>
-                    <p class="text-gray-600 mt-2">Full-stack study group application</p>
-                    <div class="project-details mt-4 hidden">
-                        <p class="text-gray-600">Currently developing a full-stack web application to connect SJSU students for study groups. Using React.js and Firebase for real-time messaging and course-based group creation.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-20">
-        <div class="container mx-auto px-6 section">
-            <h2 class="text-3xl font-bold mb-8 gradient-text">Technical Skills</h2>
-            <div class="grid md:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="font-bold text-gray
-                    <h3 class="font-bold text-gray-800 mb-4">Programming Languages</h3>
-                    <p class="text-gray-600">Python, Java, SQL, HTML5, CSS, Javascript</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="font-bold text-gray-800 mb-4">Frameworks</h3>
-                    <p class="text-gray-600">SciPy, NumPy, Pandas, Scikit-learn, Flask, ReactJS</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="font-bold text-gray-800 mb-4">Developer Tools</h3>
-                    <p class="text-gray-600">Jira, Git, Docker, AWS, Linux, Excel</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="font-bold text-gray-800 mb-4">ML & Data Science</h3>
-                    <p class="text-gray-600">TensorFlow, PyTorch, Keras, Scikit-learn</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-white py-8">
-        <div class="container mx-auto px-6 text-center text-gray-600">
-            <p>© 2024 Sarthak Sethi. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    </div>
 </body>
 </html>
