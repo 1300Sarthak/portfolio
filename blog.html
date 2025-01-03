@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarthak Sethi - Blog</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #2b2b2b;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #1a1a1a;
+            padding: 1rem 10%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: #666;
+            text-decoration: none;
+            margin-right: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+        }
+
+        .blog-card {
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-date {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .blog-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .blog-preview {
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .blog-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 15px;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 5%;
+            }
+            
+            .blog-container {
+                margin-top: 80px;
+            }
+
+            .blog-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="blog.html" style="color: #fff;">Blog</a>
+        <a href="Resume/Resume.pdf" target="_blank">Resume</a>
+        <a href="mailto:sarthakluv@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/sarsethi/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/1300Sarthak" target="_blank">GitHub</a>
+        <a href="https://devpost.com/1300Sarthak" target="_blank">DevPost</a>
+    </nav>
+
+    <div class="blog-container">
+        <article class="blog-card">
+            <div class="blog-date">January 2, 2025</div>
+            <h2 class="blog-title">Python Certification - META </h2>
+            <p class="blog-preview">
+                Started working on a certification; Programming in Python by Meta. My goal is to finish this certiefication before the 
+                semester starts, I also did some research into some things I really want to do this year. I even read a good amount about ipython
+                and started working on it a little bit, need to work on improving my skills within statistics as well.
+            </p>
+            <div class="blog-tags">
+                <span class="tag">Python</span>
+                <span class="tag">Data Science</span>
+                <span class="tag">Statistics</span>
+            </div>
+        </article>
+
+    </div>
+</body>
+</html>
