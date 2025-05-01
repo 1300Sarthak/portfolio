@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarthak Sethi - Blog</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        .management-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: #1a1a1a;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .management-btn:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="blog.html" style="color: #fff;">Blog</a>
+        <a href="Resume/Resume.pdf" target="_blank">Resume</a>
+        <a href="mailto:sarthakluv@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/sarsethi/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/1300Sarthak" target="_blank">GitHub</a>
+        <a href="https://devpost.com/1300Sarthak" target="_blank">DevPost</a>
+        <a href="certificates.html" target="_blank">Certificates</a>
+    </nav>
+
+    <div class="blog-container" id="blogContainer">
+        <!-- Blog posts will be dynamically added here -->
+    </div>
+
+    <!-- PIN Authentication Modal -->
+    <div id="pinModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="text-xl mb-4">Enter PIN</h2>
+            <div class="form-group">
+                <input type="password" id="pinInput" placeholder="Enter PIN" maxlength="4">
+            </div>
+            <button class="btn" onclick="verifyPin()">Submit</button>
+        </div>
+    </div>
+
+    <!-- Add Blog Post Modal -->
+    <div id="addPostModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="text-xl mb-4">Add New Blog Post</h2>
+            <form id="blogPostForm">
+                <div class="form-group">
+                    <label for="postTitle">Title</label>
+                    <input type="text" id="postTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="postContent">Content</label>
+                    <textarea id="postContent" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="postTags">Tags (comma-separated)</label>
+                    <input type="text" id="postTags" placeholder="e.g., Python, Data Science">
+                </div>
+                <button type="submit" class="btn">Add Post</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Chat Button -->
+    <button id="chatButton" class="chat-button">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+    </button>
+
+    <!-- Chat Modal -->
+    <div id="chatModal" class="modal">
+        <div class="chat-modal-content">
+            <div class="chat-header">
+                <h2>Chat with AI Assistant</h2>
+                <span class="close close-chat">&times;</span>
+            </div>
+            <div id="chatMessages" class="chat-messages"></div>
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" placeholder="Type your message...">
+                <button id="sendMessage">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Management Button -->
+    <button class="btn management-btn" onclick="showPinModal()">Manage Posts</button>
+
+    <script type="module" src="script.js"></script>
+    <script type="module" src="chat.js"></script>
+</body>
+</html>
