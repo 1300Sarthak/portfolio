@@ -72,7 +72,7 @@ async function verifyPin() {
     const pin = pinInput.value;
 
     try {
-        const response = await fetch('http://localhost:5002/api/verify-pin', {
+        const response = await fetch('https://portfolio-62eh.onrender.com/api/verify-pin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
