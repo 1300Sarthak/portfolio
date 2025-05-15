@@ -18,6 +18,6 @@ services:
 
 databases:
   - name: portfolio-db
-    databaseName: portfolio
+    databaseName: portfolio_w2vv
     user: portfolio_user
     plan: free
