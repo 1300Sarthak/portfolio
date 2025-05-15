@@ -52,11 +52,6 @@ class BlogPost(db.Model):
         }
 
 
-# Create database tables
-with app.app_context():
-    db.create_all()
-    print("✅ Tables created successfully")
-
 # Configure OpenAI
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 PIN = os.getenv('PIN')
@@ -272,6 +267,12 @@ def chat():
     except Exception as e:
         print(f"Error: {str(e)}")
         return jsonify({'error': 'An error occurred while processing your request'}), 500
+
+
+# Create database tables
+with app.app_context():
+    db.create_all()
+    print("✅ Tables created successfully")
 
 
 if __name__ == '__main__':
