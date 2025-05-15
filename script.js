@@ -1,6 +1,7 @@
 // Remove config import and use backend API for PIN verification
 let isAuthenticated = false;
 let blogPosts = [];
+let adminPin = ''; // Store PIN after successful verification
 
 // Fetch posts from backend
 async function fetchPosts() {
@@ -79,6 +80,7 @@ async function verifyPin() {
 
         if (data.success) {
             isAuthenticated = true;
+            adminPin = pin; // Store PIN after successful verification
             document.getElementById('pinModal').style.display = 'none';
             pinInput.value = '';
             displayPosts(); // Refresh display to show management options
@@ -137,6 +139,12 @@ async function setupBlogForm() {
 
 // Delete blog post
 async function deletePost(postId) {
+    if (!isAuthenticated || !adminPin) {
+        alert('Please authenticate first');
+        showPinModal();
+        return;
+    }
+
     if (!confirm('Are you sure you want to delete this post?')) {
         return;
     }
@@ -145,12 +153,20 @@ async function deletePost(postId) {
         const response = await fetch(`https://portfolio-62eh.onrender.com/api/posts/${postId}`, {
             method: 'DELETE',
             headers: {
-                'Authorization': PIN // Send PIN for authentication
+                'Authorization': adminPin
             }
         });
 
         if (!response.ok) {
-            throw new Error('Failed to delete post');
+            if (response.status === 401) {
+                alert('Authentication failed. Please verify PIN again.');
+                isAuthenticated = false;
+                adminPin = '';
+                showPinModal();
+            } else {
+                throw new Error('Failed to delete post');
+            }
+            return;
         }
 
         await fetchPosts(); // Refresh posts from server

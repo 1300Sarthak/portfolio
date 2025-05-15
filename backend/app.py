@@ -24,6 +24,12 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'pool_size': 10,
+    'pool_recycle': 300,
+    'pool_pre_ping': True
+}
+
 db = SQLAlchemy(app)
 
 # Blog Post model
@@ -268,5 +274,6 @@ def chat():
 
 
 if __name__ == '__main__':
+    # Only use this for local development
     port = int(os.environ.get('PORT', 5002))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=False)

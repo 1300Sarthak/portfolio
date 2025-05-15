@@ -2,8 +2,10 @@ services:
   - type: web
     name: portfolio-backend
     runtime: python
-    buildCommand: pip install -r backend/requirements.txt
-    startCommand: cd backend && python app.py
+    buildCommand: |
+      python -m pip install --upgrade pip
+      pip install -r backend/requirements.txt
+    startCommand: cd backend && gunicorn app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
@@ -11,6 +13,8 @@ services:
         fromDatabase:
           name: portfolio-db
           property: connectionString
+      - key: PORT
+        value: 10000
 
 databases:
   - name: portfolio-db
