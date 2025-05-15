@@ -55,6 +55,7 @@ class BlogPost(db.Model):
 # Create database tables
 with app.app_context():
     db.create_all()
+    print("✅ Tables created successfully")
 
 # Configure OpenAI
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
