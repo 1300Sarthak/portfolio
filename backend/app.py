@@ -20,16 +20,9 @@ if not supabase_url or not supabase_key:
         "Missing Supabase credentials. Please set SUPABASE_URL and SUPABASE_KEY environment variables.")
 
 try:
-    supabase: Client = create_client(
-        supabase_url,
-        supabase_key,
-        options={
-            'schema': 'public',
-            'headers': {'X-Client-Info': 'portfolio-backend'},
-            'auto_refresh_token': True,
-            'persist_session': False
-        }
-    )
+    # Initialize Supabase client with minimal options
+    supabase: Client = create_client(supabase_url, supabase_key)
+
     # Test the connection
     response = supabase.table('blog_posts').select(
         'count', count='exact').execute()
