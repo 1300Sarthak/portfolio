@@ -19,7 +19,24 @@ if not supabase_url or not supabase_key:
     raise ValueError(
         "Missing Supabase credentials. Please set SUPABASE_URL and SUPABASE_KEY environment variables.")
 
-supabase: Client = create_client(supabase_url, supabase_key)
+try:
+    supabase: Client = create_client(
+        supabase_url,
+        supabase_key,
+        options={
+            'schema': 'public',
+            'headers': {'X-Client-Info': 'portfolio-backend'},
+            'auto_refresh_token': True,
+            'persist_session': False
+        }
+    )
+    # Test the connection
+    response = supabase.table('blog_posts').select(
+        'count', count='exact').execute()
+    print("Successfully connected to Supabase. Table exists.")
+except Exception as e:
+    print(f"Error connecting to Supabase: {str(e)}")
+    raise
 
 # Configure OpenAI
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
@@ -52,7 +69,10 @@ def get_posts():
 def create_post():
     try:
         data = request.json
+        print("Received data:", data)  # Debug log
+
         if not data or not all(k in data for k in ['title', 'content', 'tags']):
+            print("Missing required fields. Received data:", data)  # Debug log
             return jsonify({'error': 'Missing required fields'}), 400
 
         new_post = {
@@ -61,16 +81,27 @@ def create_post():
             'tags': ','.join(data['tags']),
             'date': datetime.now().strftime('%B %d, %Y')
         }
+        print("Attempting to create post with data:", new_post)  # Debug log
 
-        response = supabase.table('blog_posts').insert(new_post).execute()
-        created_post = response.data[0]
-        created_post['tags'] = created_post['tags'].split(
-            ',') if created_post['tags'] else []
+        try:
+            response = supabase.table('blog_posts').insert(new_post).execute()
+            print("Supabase response:", response)  # Debug log
+            created_post = response.data[0]
+            created_post['tags'] = created_post['tags'].split(
+                ',') if created_post['tags'] else []
+            return jsonify(created_post), 201
+        except Exception as supabase_error:
+            print("Supabase error:", str(supabase_error))  # Debug log
+            print("Error type:", type(supabase_error))  # Debug log
+            raise supabase_error
 
-        return jsonify(created_post), 201
     except Exception as e:
         print(f"Error creating post: {str(e)}")
-        return jsonify({'error': 'An error occurred while creating the post'}), 500
+        print(f"Error type: {type(e)}")  # Debug log
+        # Debug log
+        print(
+            f"Error details: {e.__dict__ if hasattr(e, '__dict__') else 'No details available'}")
+        return jsonify({'error': 'An error occurred while creating the post', 'details': str(e)}), 500
 
 
 @app.route('/api/posts/<int:post_id>', methods=['DELETE'])
