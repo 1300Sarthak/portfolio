@@ -3,8 +3,8 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 import os
 from openai import OpenAI
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from supabase import create_client, Client
 
 # Load environment variables
 load_dotenv()
@@ -12,45 +12,14 @@ load_dotenv()
 app = Flask(__name__, static_folder='..', static_url_path='')
 CORS(app)  # Enable CORS for all routes
 
-# Configure database
-# Use PostgreSQL if DATABASE_URL is set, otherwise fallback to SQLite for local development
-database_url = os.getenv('DATABASE_URL')
-if database_url:
-    # Render provides DATABASE_URL with postgres://, but SQLAlchemy needs postgresql://
-    if database_url.startswith('postgres://'):
-        database_url = database_url.replace('postgres://', 'postgresql://', 1)
-    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
-else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+# Configure Supabase
+supabase_url = os.getenv('SUPABASE_URL')
+supabase_key = os.getenv('SUPABASE_KEY')
+if not supabase_url or not supabase_key:
+    raise ValueError(
+        "Missing Supabase credentials. Please set SUPABASE_URL and SUPABASE_KEY environment variables.")
 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-    'pool_size': 10,
-    'pool_recycle': 300,
-    'pool_pre_ping': True
-}
-
-db = SQLAlchemy(app)
-
-# Blog Post model
-
-
-class BlogPost(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False)
-    content = db.Column(db.Text, nullable=False)
-    date = db.Column(db.String(50), nullable=False)
-    tags = db.Column(db.String(200))  # Store tags as comma-separated string
-
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'title': self.title,
-            'content': self.content,
-            'date': self.date,
-            'tags': self.tags.split(',') if self.tags else []
-        }
-
+supabase: Client = create_client(supabase_url, supabase_key)
 
 # Configure OpenAI
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
@@ -67,8 +36,13 @@ def serve_index():
 @app.route('/api/posts', methods=['GET'])
 def get_posts():
     try:
-        posts = BlogPost.query.order_by(BlogPost.date.desc()).all()
-        return jsonify([post.to_dict() for post in posts])
+        response = supabase.table('blog_posts').select(
+            '*').order('date', desc=True).execute()
+        posts = response.data
+        # Convert tags from string to list
+        for post in posts:
+            post['tags'] = post['tags'].split(',') if post['tags'] else []
+        return jsonify(posts)
     except Exception as e:
         print(f"Error fetching posts: {str(e)}")
         return jsonify({'error': 'An error occurred while fetching posts'}), 500
@@ -81,19 +55,20 @@ def create_post():
         if not data or not all(k in data for k in ['title', 'content', 'tags']):
             return jsonify({'error': 'Missing required fields'}), 400
 
-        new_post = BlogPost(
-            title=data['title'],
-            content=data['content'],
-            tags=','.join(data['tags']),
-            date=datetime.now().strftime('%B %d, %Y')
-        )
+        new_post = {
+            'title': data['title'],
+            'content': data['content'],
+            'tags': ','.join(data['tags']),
+            'date': datetime.now().strftime('%B %d, %Y')
+        }
 
-        db.session.add(new_post)
-        db.session.commit()
+        response = supabase.table('blog_posts').insert(new_post).execute()
+        created_post = response.data[0]
+        created_post['tags'] = created_post['tags'].split(
+            ',') if created_post['tags'] else []
 
-        return jsonify(new_post.to_dict()), 201
+        return jsonify(created_post), 201
     except Exception as e:
-        db.session.rollback()
         print(f"Error creating post: {str(e)}")
         return jsonify({'error': 'An error occurred while creating the post'}), 500
 
@@ -106,12 +81,13 @@ def delete_post(post_id):
         if not auth_header or auth_header != PIN:
             return jsonify({'error': 'Unauthorized'}), 401
 
-        post = BlogPost.query.get_or_404(post_id)
-        db.session.delete(post)
-        db.session.commit()
+        response = supabase.table('blog_posts').delete().eq(
+            'id', post_id).execute()
+        if not response.data:
+            return jsonify({'error': 'Post not found'}), 404
+
         return jsonify({'message': 'Post deleted successfully'})
     except Exception as e:
-        db.session.rollback()
         print(f"Error deleting post: {str(e)}")
         return jsonify({'error': 'An error occurred while deleting the post'}), 500
 
@@ -267,12 +243,6 @@ def chat():
     except Exception as e:
         print(f"Error: {str(e)}")
         return jsonify({'error': 'An error occurred while processing your request'}), 500
-
-
-# Create database tables
-with app.app_context():
-    db.create_all()
-    print("✅ Tables created successfully")
 
 
 if __name__ == '__main__':
