@@ -1,25 +1,20 @@
 // Remove config import and use backend API for PIN verification
 let isAuthenticated = false;
+let blogPosts = [];
 
-// Initialize blog posts from localStorage or use default posts
-let blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [
-    {
-        date: 'January 5, 2025',
-        title: 'New Resume',
-        content: 'Not going to do much today, I am still nervous about starting my internship tomorrow, but I am looking forward to it! Going to take today as a rest day, and know more on what I have to do tommorrow!',
-        tags: ['Internship']
-    },
-    {
-        date: 'January 4, 2025',
-        title: 'Mutliple Resume',
-        content: 'I had worked on my resume today, trying to get it ready for this upcoming year as I know have an internship, since I now I have mutliple internships, I decided to make different resumes for each job type I can get, to make myself a more well rounded person!',
-        tags: ['Resume']
+// Fetch posts from backend
+async function fetchPosts() {
+    try {
+        const response = await fetch('https://portfolio-62eh.onrender.com/api/posts');
+        if (!response.ok) {
+            throw new Error('Failed to fetch posts');
+        }
+        blogPosts = await response.json();
+        displayPosts();
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+        alert('Error loading blog posts. Please try again later.');
     }
-];
-
-// Save posts to localStorage
-function savePosts() {
-    localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
 }
 
 // Display blog posts
@@ -29,7 +24,7 @@ function displayPosts() {
     
     container.innerHTML = '';
     
-    blogPosts.forEach((post, index) => {
+    blogPosts.forEach((post) => {
         const article = document.createElement('article');
         article.className = 'blog-card';
         article.innerHTML = `
@@ -41,7 +36,7 @@ function displayPosts() {
             </div>
             ${isAuthenticated ? `
                 <div class="mt-4 flex gap-2">
-                    <button class="btn" onclick="deletePost(${index})">Delete</button>
+                    <button class="btn" onclick="deletePost(${post.id})">Delete</button>
                 </div>
             ` : ''}
         `;
@@ -99,19 +94,14 @@ async function verifyPin() {
 }
 
 // Add new blog post
-function setupBlogForm() {
+async function setupBlogForm() {
     const form = document.getElementById('blogPostForm');
     if (!form) return; // Exit if not on blog page
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         const newPost = {
-            date: new Date().toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            }),
             title: document.getElementById('postTitle').value,
             content: document.getElementById('postContent').value,
             tags: document.getElementById('postTags').value
@@ -120,22 +110,53 @@ function setupBlogForm() {
                 .filter(tag => tag)
         };
 
-        blogPosts.unshift(newPost);
-        savePosts();
-        displayPosts();
-        
-        // Reset form and close modal
-        this.reset();
-        document.getElementById('addPostModal').style.display = 'none';
+        try {
+            const response = await fetch('https://portfolio-62eh.onrender.com/api/posts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newPost)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to create post');
+            }
+
+            await fetchPosts(); // Refresh posts from server
+            
+            // Reset form and close modal
+            this.reset();
+            document.getElementById('addPostModal').style.display = 'none';
+        } catch (error) {
+            console.error('Error creating post:', error);
+            alert('Error creating post. Please try again.');
+        }
     });
 }
 
 // Delete blog post
-function deletePost(index) {
-    if (confirm('Are you sure you want to delete this post?')) {
-        blogPosts.splice(index, 1);
-        savePosts();
-        displayPosts();
+async function deletePost(postId) {
+    if (!confirm('Are you sure you want to delete this post?')) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`https://portfolio-62eh.onrender.com/api/posts/${postId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': PIN // Send PIN for authentication
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to delete post');
+        }
+
+        await fetchPosts(); // Refresh posts from server
+    } catch (error) {
+        console.error('Error deleting post:', error);
+        alert('Error deleting post. Please try again.');
     }
 }
 
@@ -157,7 +178,7 @@ function setupModalClose() {
 
 // Initial setup
 document.addEventListener('DOMContentLoaded', function() {
-    displayPosts();
+    fetchPosts(); // Fetch posts when page loads
     setupBlogForm();
     setupModalClose();
     

@@ -3,12 +3,52 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 import os
 from openai import OpenAI
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__, static_folder='..', static_url_path='')
 CORS(app)  # Enable CORS for all routes
+
+# Configure database
+# Use PostgreSQL if DATABASE_URL is set, otherwise fallback to SQLite for local development
+database_url = os.getenv('DATABASE_URL')
+if database_url:
+    # Render provides DATABASE_URL with postgres://, but SQLAlchemy needs postgresql://
+    if database_url.startswith('postgres://'):
+        database_url = database_url.replace('postgres://', 'postgresql://', 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+# Blog Post model
+
+
+class BlogPost(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    date = db.Column(db.String(50), nullable=False)
+    tags = db.Column(db.String(200))  # Store tags as comma-separated string
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'content': self.content,
+            'date': self.date,
+            'tags': self.tags.split(',') if self.tags else []
+        }
+
+
+# Create database tables
+with app.app_context():
+    db.create_all()
 
 # Configure OpenAI
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
@@ -18,6 +58,60 @@ PIN = os.getenv('PIN')
 @app.route('/')
 def serve_index():
     return send_from_directory(app.static_folder, 'index.html')
+
+# Blog CRUD endpoints
+
+
+@app.route('/api/posts', methods=['GET'])
+def get_posts():
+    try:
+        posts = BlogPost.query.order_by(BlogPost.date.desc()).all()
+        return jsonify([post.to_dict() for post in posts])
+    except Exception as e:
+        print(f"Error fetching posts: {str(e)}")
+        return jsonify({'error': 'An error occurred while fetching posts'}), 500
+
+
+@app.route('/api/posts', methods=['POST'])
+def create_post():
+    try:
+        data = request.json
+        if not data or not all(k in data for k in ['title', 'content', 'tags']):
+            return jsonify({'error': 'Missing required fields'}), 400
+
+        new_post = BlogPost(
+            title=data['title'],
+            content=data['content'],
+            tags=','.join(data['tags']),
+            date=datetime.now().strftime('%B %d, %Y')
+        )
+
+        db.session.add(new_post)
+        db.session.commit()
+
+        return jsonify(new_post.to_dict()), 201
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error creating post: {str(e)}")
+        return jsonify({'error': 'An error occurred while creating the post'}), 500
+
+
+@app.route('/api/posts/<int:post_id>', methods=['DELETE'])
+def delete_post(post_id):
+    try:
+        # Verify PIN first
+        auth_header = request.headers.get('Authorization')
+        if not auth_header or auth_header != PIN:
+            return jsonify({'error': 'Unauthorized'}), 401
+
+        post = BlogPost.query.get_or_404(post_id)
+        db.session.delete(post)
+        db.session.commit()
+        return jsonify({'message': 'Post deleted successfully'})
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error deleting post: {str(e)}")
+        return jsonify({'error': 'An error occurred while deleting the post'}), 500
 
 
 @app.route('/api/verify-pin', methods=['POST'])
