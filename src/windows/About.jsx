@@ -76,11 +76,11 @@ const About = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximi
       onMaximize={onMaximize}
       onRestore={onRestore}
       defaultPosition={defaultPosition}
-      defaultSize={{ width: 540, height: 420 }}
+      defaultSize={{ width: 1200, height: 600 }}
     >
       <Content>
         <TopRow>
-          <Photo src="/profile.jpg" alt="Profile" />
+          <Photo src="/Screenshot 2025-06-14 at 6.11.55 PM.png" alt="Profile" />
           <NameBlock>
             <Name>Sarthak Sethi</Name>
             <Subtitle>Computer Science &amp; Applied Math Student</Subtitle>
@@ -95,8 +95,35 @@ const About = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximi
             <SkillList>React, Next.js, JavaScript, HTML5, CSS, Tailwind CSS</SkillList>
           </SkillCol>
           <SkillCol>
-            <SkillTitle>Backend</SkillTitle>
-            <SkillList>Python, Flask, Django, Node.js, SQL, PostgreSQL, MongoDB</SkillList>
+            <SkillTitle>AI/ML</SkillTitle>
+            <SkillList>OpenAI, Hugging Face, TensorFlow, PyTorch, Scikit-learn, Pandas, NumPy, LLMs, RAG, MCP, CAG, LLM-based Agents, </SkillList>
+          </SkillCol>
+          <SkillCol>
+            <SkillTitle>Backend/Database</SkillTitle>
+            <SkillList>Spring Boot, Flask, Django, SQL(PostgreSQL, MySQL, SQLite, OracleDB), MongoDB, VectorDBs</SkillList>
+          </SkillCol>
+          <SkillCol>
+            <SkillTitle>Soft Skills</SkillTitle>
+            <SkillList>Communication, Leadership, Teamwork, Time Management, Problem Solving, Adaptability, Critical Thinking, Public Speaking, Growth Mindset</SkillList>
+          </SkillCol>
+          <SkillCol>
+            <SkillTitle>IT Tools</SkillTitle>
+            <SkillList>Docker, Kubernetes, Git, GitHub, CI/CD, AWS (s3, Lambda), Azure, GCP, Linux, Windows, MacOS</SkillList>
+          </SkillCol>
+          <SkillCol>
+            <SkillTitle>Hackathons Won</SkillTitle>
+            <SkillList>1st Place: Microsoft Azure Hackathon @SJSU (May 2025),Vibe-02 Hackathon (June 2025)</SkillList>
+            <SkillList>2nd Place: SJHacks (April 2025), SiliconXHacks (April 2024) </SkillList>
+          </SkillCol>
+          <SkillCol>
+            <SkillTitle>UI/UX & Design</SkillTitle>
+            <SkillList>Figma</SkillList>
+            <SkillList>Adobe Photoshopn</SkillList>
+            <SkillList>Final Cut Pro X</SkillList>
+          </SkillCol>
+          <SkillCol>
+            <SkillTitle>Classes Taken</SkillTitle>
+            <SkillList>Data Structures and Algorithms, Database Systems, Machine Learning,Object Oriented Programing, Intro. to Java, Intro. to Data Structures</SkillList>
           </SkillCol>
         </SkillsRow>
       </Content>

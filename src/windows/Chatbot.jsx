@@ -103,7 +103,7 @@ function linkify(text) {
 
 const Chatbot = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximize, onRestore, defaultPosition }) => {
   const [messages, setMessages] = useState([
-    { from: 'bot', text: 'Hi! I am your AI assistant. How can I help you today?' }
+    { from: 'bot', text: 'Hi! I am Sarthak Sethi, what would you like to learn about me?' }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -123,7 +123,7 @@ const Chatbot = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaxi
     setInput('');
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/chat', {
+      const res = await fetch('http://localhost:5002/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: input })
@@ -138,7 +138,7 @@ const Chatbot = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaxi
 
   return (
     <WindowFrame
-      title="Chatbot"
+      title="Sarthak Sethi"
       isOpen={isOpen}
       isMinimized={isMinimized}
       isMaximized={isMaximized}

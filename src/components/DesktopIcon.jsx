@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaFileAlt } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaFileAlt, FaImages } from 'react-icons/fa';
 
 const IconContainer = styled(motion.div)`
   display: flex;
@@ -55,6 +55,8 @@ const getIcon = (type) => {
       return <FaLinkedin size={32} />;
     case 'resume':
       return <FaFileAlt size={32} />;
+    case 'photos':
+      return <FaImages size={32} />;
     default:
       return null;
   }

@@ -10,6 +10,10 @@ import Projects from './windows/Projects';
 import Skills from './windows/Skills';
 import Blog from './windows/Blog';
 import Chatbot from './windows/Chatbot';
+import Resume from './windows/Resume';
+import Photos from './windows/Photos';
+import NotificationBanner from './components/NotificationBanner';
+import Contact from './windows/Contact';
 
 const AppContainer = styled.div`
   width: 100vw;
@@ -104,8 +108,10 @@ const initialWindowState = {
   projects: { open: false, minimized: false, maximized: false },
   skills: { open: false, minimized: false, maximized: false },
   blog: { open: false, minimized: false, maximized: false },
-  contact: { open: false, minimized: false, maximized: false },
   chatbot: { open: false, minimized: false, maximized: false },
+  resume: { open: false, minimized: false, maximized: false },
+  photos: { open: false, minimized: false, maximized: false },
+  contact: { open: false, minimized: false, maximized: false },
 };
 
 function getRandomPosition() {
@@ -120,6 +126,19 @@ function getRandomPosition() {
 const App = () => {
   const [windows, setWindows] = useState(initialWindowState);
   const [windowPositions, setWindowPositions] = useState({});
+  const [zOrder, setZOrder] = useState([]);
+
+  const getZIndex = (windowId) => {
+    const idx = zOrder.indexOf(windowId);
+    return idx === -1 ? 100 : 100 + idx;
+  };
+
+  const bringToFront = (windowId) => {
+    setZOrder((prev) => {
+      const filtered = prev.filter((id) => id !== windowId);
+      return [...filtered, windowId];
+    });
+  };
 
   const handleWindowSelect = (windowId) => {
     setWindows(prev => ({
@@ -195,7 +214,7 @@ const App = () => {
     {
       type: 'resume',
       label: 'Resume',
-      href: '/resume.pdf',
+      onClick: () => handleWindowSelect('resume'),
       position: { x: 20, y: 260 }
     },
     {
@@ -203,11 +222,28 @@ const App = () => {
       label: 'Chatbot',
       onClick: () => handleWindowSelect('chatbot'),
       position: { x: 20, y: 380 }
+    },
+    {
+      type: 'photos',
+      label: 'Photos',
+      onClick: () => handleWindowSelect('photos'),
+      position: { x: 20, y: 500 }
+    },
+    {
+      type: 'contact',
+      label: 'Contact',
+      onClick: () => handleWindowSelect('contact'),
+      position: { x: 20, y: 620 }
     }
   ];
 
   return (
     <AppContainer>
+      <NotificationBanner
+        image="/Screenshot 2025-06-14 at 6.11.55 PM.png"
+        message="Hello there! My name is Sarthak, welcome to my site. Make sure to look around, and use the Text Message feature to get more detailed information about me."
+        duration={15000}
+      />
       <Overlay>
         <Name>Sarthak Sethi</Name>
         <Subtitle>Computer Science &amp; Applied Math Student</Subtitle>
@@ -234,6 +270,9 @@ const App = () => {
         onMaximize={() => handleWindowMaximize('about')}
         onRestore={() => handleWindowRestore('about')}
         defaultPosition={windowPositions.about || { x: 100, y: 100 }}
+        defaultSize={{ width: 1200, height: 600 }}
+        style={{ zIndex: getZIndex('about') }}
+        onMouseDown={() => bringToFront('about')}
       />
       <Club
         isOpen={windows.club.open}
@@ -244,6 +283,8 @@ const App = () => {
         onMaximize={() => handleWindowMaximize('club')}
         onRestore={() => handleWindowRestore('club')}
         defaultPosition={windowPositions.club || { x: 120, y: 120 }}
+        style={{ zIndex: getZIndex('club') }}
+        onMouseDown={() => bringToFront('club')}
       />
       <Internships
         isOpen={windows.internships.open}
@@ -254,6 +295,8 @@ const App = () => {
         onMaximize={() => handleWindowMaximize('internships')}
         onRestore={() => handleWindowRestore('internships')}
         defaultPosition={windowPositions.internships || { x: 140, y: 140 }}
+        style={{ zIndex: getZIndex('internships') }}
+        onMouseDown={() => bringToFront('internships')}
       />
       <Certificates
         isOpen={windows.certificates.open}
@@ -264,6 +307,8 @@ const App = () => {
         onMaximize={() => handleWindowMaximize('certificates')}
         onRestore={() => handleWindowRestore('certificates')}
         defaultPosition={windowPositions.certificates || { x: 160, y: 160 }}
+        style={{ zIndex: getZIndex('certificates') }}
+        onMouseDown={() => bringToFront('certificates')}
       />
       <Projects
         isOpen={windows.projects.open}
@@ -274,6 +319,8 @@ const App = () => {
         onMaximize={() => handleWindowMaximize('projects')}
         onRestore={() => handleWindowRestore('projects')}
         defaultPosition={windowPositions.projects || { x: 180, y: 180 }}
+        style={{ zIndex: getZIndex('projects') }}
+        onMouseDown={() => bringToFront('projects')}
       />
       <Skills
         isOpen={windows.skills.open}
@@ -284,6 +331,8 @@ const App = () => {
         onMaximize={() => handleWindowMaximize('skills')}
         onRestore={() => handleWindowRestore('skills')}
         defaultPosition={windowPositions.skills || { x: 200, y: 200 }}
+        style={{ zIndex: getZIndex('skills') }}
+        onMouseDown={() => bringToFront('skills')}
       />
       <Blog
         isOpen={windows.blog.open}
@@ -294,6 +343,8 @@ const App = () => {
         onMaximize={() => handleWindowMaximize('blog')}
         onRestore={() => handleWindowRestore('blog')}
         defaultPosition={windowPositions.blog || { x: 220, y: 220 }}
+        style={{ zIndex: getZIndex('blog') }}
+        onMouseDown={() => bringToFront('blog')}
       />
       <Chatbot
         isOpen={windows.chatbot.open}
@@ -304,6 +355,45 @@ const App = () => {
         onMaximize={() => handleWindowMaximize('chatbot')}
         onRestore={() => handleWindowRestore('chatbot')}
         defaultPosition={windowPositions.chatbot || { x: 240, y: 240 }}
+        style={{ zIndex: getZIndex('chatbot') }}
+        onMouseDown={() => bringToFront('chatbot')}
+      />
+      <Resume
+        isOpen={windows.resume.open}
+        isMinimized={windows.resume.minimized}
+        isMaximized={windows.resume.maximized}
+        onClose={() => handleWindowClose('resume')}
+        onMinimize={() => handleWindowMinimize('resume')}
+        onMaximize={() => handleWindowMaximize('resume')}
+        onRestore={() => handleWindowRestore('resume')}
+        defaultPosition={windowPositions.resume || { x: 240, y: 240 }}
+        defaultSize={{ width: 1000, height: 900 }}
+        style={{ zIndex: getZIndex('resume') }}
+        onMouseDown={() => bringToFront('resume')}
+      />
+      <Photos
+        isOpen={windows.photos.open}
+        isMinimized={windows.photos.minimized}
+        isMaximized={windows.photos.maximized}
+        onClose={() => handleWindowClose('photos')}
+        onMinimize={() => handleWindowMinimize('photos')}
+        onMaximize={() => handleWindowMaximize('photos')}
+        onRestore={() => handleWindowRestore('photos')}
+        defaultPosition={windowPositions.photos || { x: 280, y: 280 }}
+        style={{ zIndex: getZIndex('photos') }}
+        onMouseDown={() => bringToFront('photos')}
+      />
+      <Contact
+        isOpen={windows.contact.open}
+        isMinimized={windows.contact.minimized}
+        isMaximized={windows.contact.maximized}
+        onClose={() => handleWindowClose('contact')}
+        onMinimize={() => handleWindowMinimize('contact')}
+        onMaximize={() => handleWindowMaximize('contact')}
+        onRestore={() => handleWindowRestore('contact')}
+        defaultPosition={windowPositions.contact || { x: 320, y: 320 }}
+        style={{ zIndex: getZIndex('contact') }}
+        onMouseDown={() => bringToFront('contact')}
       />
       <Dock
         activeWindow={Object.entries(windows).find(([, w]) => w.open && !w.minimized)?.[0]}

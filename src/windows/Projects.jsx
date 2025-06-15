@@ -2,102 +2,136 @@ import React from 'react';
 import WindowFrame from '../components/WindowFrame';
 import styled from '@emotion/styled';
 
-const Content = styled.div`
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: #222;
-  padding: 32px 32px 24px 32px;
-  min-width: 480px;
-`;
-const Heading = styled.h2`
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 18px;
-`;
-const CardList = styled.div`
+const CardGrid = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
+  margin-top: 12px;
 `;
-const Card = styled.div`
-  background: #fafaff;
-  border-radius: 12px;
+const Card = styled.a`
+  display: block;
+  background: rgba(255,245,255,0.95);
+  border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   padding: 18px 20px;
-  border: 1px solid #ececec;
+  color: #222;
+  text-decoration: none;
+  font-weight: 500;
+  transition: box-shadow 0.18s, background 0.18s;
+  border: 1px solid #e0e0e0;
+  &:hover {
+    background: #f5eaff;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+  }
 `;
-const CardTitle = styled.div`
-  font-size: 1.13rem;
-  font-weight: 700;
-  margin-bottom: 4px;
-`;
-const CardDesc = styled.div`
-  color: #444;
-  font-size: 1.01rem;
-  margin-bottom: 10px;
-`;
-const BadgeRow = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-const Badge = styled.span`
-  display: inline-block;
-  background: ${props => props.bg || '#eee'};
-  color: ${props => props.color || '#222'};
-  border-radius: 6px;
-  font-size: 0.97rem;
+const ProjectTitle = styled.div`
+  font-size: 1.1rem;
   font-weight: 600;
-  padding: 2px 10px;
-  letter-spacing: 0.01em;
+`;
+const ProjectDesc = styled.div`
+  font-size: 0.97rem;
+  color: #444;
+  margin: 6px 0 8px 0;
+`;
+const ProjectTech = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+`;
+const TechTag = styled.span`
+  background: #e0e0ff;
+  color: #333;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 0.93rem;
 `;
 
 const projects = [
   {
-    title: 'EmbrAlert',
-    desc: 'A full-stack wildfire detection and alert app for San Jose. Real-time risk, AI smoke detection, multilingual chatbot, and live camera integration.',
-    stack: [
-      { name: 'React', bg: '#e3f0ff', color: '#3578e5' },
-      { name: 'Node.js', bg: '#e6ffe3', color: '#2e7d32' },
-      { name: 'MongoDB', bg: '#f3eaff', color: '#8e24aa' }
-    ]
+    title: 'GovChat - 1st Place Winner at Microsoft Azure Hackathon for Public Sector',
+    link: 'https://youtu.be/9DnK_Y8Fuiw',
+    desc: 'MCP and RAG based chatbot',
+    tech: ['RAG', 'MCP', 'LLM', 'React.JS', 'Python', 'Django', 'Azure'],
   },
   {
-    title: 'SJFit',
-    desc: 'A fitness tracker for SJSU students. Uses AI and MediaPipe to count reps, track exercises, and give real-time feedback.',
-    stack: [
-      { name: 'React', bg: '#e3f0ff', color: '#3578e5' },
-      { name: 'Python', bg: '#fffbe3', color: '#e6a100' },
-      { name: 'TensorFlow', bg: '#eafff3', color: '#00897b' }
-    ]
+    title: 'SJFit - 2nd Place Winner at Silicon Hacks',
+    link: 'https://github.com/1300Sarthak/SJFIT',
+    desc: 'Developed an app using MediaPipe for pose estimation and CNNs for joint angle analysis, achieving 20% improvement in form detection. Integrated OpenCV for real-time feedback and NumPy for efficient data handling. Achieved 95% accuracy in tracking exercises like squats and curls, providing real-time performance analysis, won 2nd place at Silicon Hacks for this innovative project.',
+    tech: ['Python', 'OpenCV', 'MediaPipe', 'Computer Vision'],
+  },
+  {
+    title: 'EmbrAlrt - 2nd Place Public Safety Track Winner at SJHacks',
+    link: 'https://github.com/1300Sarthak/EmbrAlrt',
+    desc: 'EmbrAlert is a one-stop platform for wildfire detection, prevention, and community alerts, built for the diverse San Jose area and beyond. It offers real-time wildfire risk assessments, live weather and air quality updates, and a simple dashboard for users to interact with. Users can upload images of potential smoke, and our lightweight RNN model predicts wildfire likelihood. The app also features a multilingual chat tool powered by a custom RAG pipeline, supporting six languages common in San Jose, with both voice and text input. Live camera wildfire detection without uploads is also integrated for instant reporting.',
+    tech: ['React', 'Python', 'Langchain', 'RAG & CAG', 'Typescript', 'LLM'],
   },
   {
     title: 'Harmony Health',
-    desc: 'AI-powered app for emotional analysis using Hume AI. Tracks vocal/facial patterns and delivers wellness insights.',
-    stack: [
-      { name: 'React', bg: '#e3f0ff', color: '#3578e5' },
-      { name: 'Node.js', bg: '#e6ffe3', color: '#2e7d32' },
-      { name: 'Hume AI', bg: '#eafff3', color: '#00897b' }
-    ]
-  }
+    link: 'https://github.com/1300Sarthak/HarmonyHealth',
+    desc: 'Engineered an AI-powered app using the Hume AI API to analyze vocal tones and facial expressions, tracking emotional patterns and mental health conditions. Integrated an End-to-End Framework for Production-Ready LLM to deliver personalized wellness insights and real-time emotional analysis.',
+    tech: ['Python', 'Flask'],
+  },
+  {
+    title: 'Mass Shooting Predictor',
+    link: 'https://github.com/1300Sarthak/MassShootingPredictor',
+    desc: 'Developed a predictive model to analyze and forecast U.S. gun violence trends, utilizing machine learning algorithms including KNN, Logistic Regression, Decision Trees, and SVMs. Currently working on integrating the Google Maps API to visualize high-risk areas, providing actionable insights for targeted safety interventions.',
+    tech: ['Python', 'Machine Learning'],
+  },
+  {
+    title: 'Portfolio Site',
+    link: 'https://github.com/1300Sarthak/portfolio',
+    desc: 'I made a portfolio site to showcase my projects and skills. I used HTML, CSS, and JavaScript to create the site. Within the site I have a chatbot which uses a custom RAG pipeline to answer questions based on me, and not other random information.',
+    tech: ['RAG', 'CAG', 'Python', 'HTML', 'CSS', 'JavaScript', 'Render (Deployment)', 'Supabase (Database)'],
+  },
+  {
+    title: 'Study Group',
+    link: 'https://github.com/1300Sarthak/SJSUStudyGroup',
+    desc: 'Currently developing a full-stack web application to connect SJSU students for study groups. Using HTML/CSS/JS for the front-end and React.js for dynamic functionality. Progressing towards integrating Firebase for user authentication and database management. The app will feature real-time messaging, course-based group creation, and availability sharing, with a focus on user-friendly design and seamless collaboration. Beta deploying Jan 2025',
+    tech: ['HTML5', 'CSS', 'JavaScript', 'Firebase'],
+  },
+  {
+    title: 'Eventify',
+    link: 'https://github.com/1300Sarthak/Eventify',
+    desc: 'Currently developing a web application using React/Next.js with server-side rendering and state management via Redux. Building a Node.js back-end with RESTful APIs and real-time features using Socket.IO. Optimizing data handling with PostgreSQL and MongoDB to improve performance and reliability. Deploying the application using Docker on AWS. Also, integrating Google Maps API for location-based events, targeting a beta launch in March 2025',
+    tech: ['React/Next.js', 'Node.js', 'PostgreSQL', 'MongoDB', 'Docker', 'AWS', 'Redis'],
+  },
+  {
+    title: 'Uzz-ify',
+    link: 'https://uzz-converter.vercel.app/',
+    desc: 'With words such as "huzz" and "bruzz" becoming words that generations such as Gen Alpha, and Gen Z, use, becoming an integral part of our modern day life. I decided to created a website so that people convert your words,phrases, or even sentences into the lanaguge of a Gen Z/Alpha person.',
+    tech: ['HTML5', 'CSS', 'JavaScript'],
+  },
+  {
+    title: 'Amulanssi',
+    link: 'https://github.com/1300Sarthak/amulanssi',
+    desc: 'Amulanssi is a semi-autonomous, voice-controlled ambulance that responds to basic voice commands and navigates with minimal human intervention. The goal is to make it fully autonomous, allowing users to "call" it for emergency medical assistance. Helping solve the problem of extremely expensive albumance services within the United States.',
+    tech: ['Arudino', 'C++'],
+  },
+  {
+    title: 'Slue - 3rd Place Winner at Expo Hacks II',
+    link: 'https://github.com/1300Sarthak/Slue',
+    desc: 'Slue is an automatic watering solution designed to keep your plants healthy even when you\'re away. By measuring soil moisture and plant nutrients, SLUE waters your plants only when necessary, ensuring optimal care.',
+    tech: ['Arudino', 'C++'],
+  },
 ];
 
 const Projects = (props) => (
   <WindowFrame title="Projects" {...props}>
-    <Content>
-      <Heading>Featured Projects</Heading>
-      <CardList>
-        {projects.map((proj, i) => (
-          <Card key={i}>
-            <CardTitle>{proj.title}</CardTitle>
-            <CardDesc>{proj.desc}</CardDesc>
-            <BadgeRow>
-              {proj.stack.map((badge, j) => (
-                <Badge key={j} bg={badge.bg} color={badge.color}>{badge.name}</Badge>
-              ))}
-            </BadgeRow>
-          </Card>
-        ))}
-      </CardList>
-    </Content>
+    <h2>Projects</h2>
+    <CardGrid>
+      {projects.map((project, i) => (
+        <Card key={i} href={project.link} target="_blank" rel="noopener noreferrer">
+          <ProjectTitle>{project.title}</ProjectTitle>
+          <ProjectDesc>{project.desc}</ProjectDesc>
+          <ProjectTech>
+            {project.tech.map((t, j) => (
+              <TechTag key={j}>{t}</TechTag>
+            ))}
+          </ProjectTech>
+        </Card>
+      ))}
+    </CardGrid>
   </WindowFrame>
 );
 

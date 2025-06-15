@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import WindowFrame from '../components/WindowFrame';
 import styled from '@emotion/styled';
 import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
@@ -68,9 +68,46 @@ const SendButton = styled.button`
   margin-top: 4px;
   transition: background 0.18s;
   &:hover { background: #245bb2; }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+`;
+const StatusMsg = styled.div`
+  margin-top: 10px;
+  font-size: 1.01rem;
+  color: ${props => props.success ? '#28c940' : '#ff3b30'};
 `;
 
 const Contact = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximize, onRestore, defaultPosition }) => {
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState(null);
+  const [sending, setSending] = useState(false);
+
+  const handleChange = e => {
+    setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setSending(true);
+    setStatus(null);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form)
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus({ success: true, msg: 'Message sent! I will get back to you soon.' });
+        setForm({ name: '', email: '', message: '' });
+      } else {
+        setStatus({ success: false, msg: data.error || 'Failed to send. Try again later.' });
+      }
+    } catch {
+      setStatus({ success: false, msg: 'Failed to send. Try again later.' });
+    }
+    setSending(false);
+  };
+
   return (
     <WindowFrame
       title="Contact"
@@ -94,11 +131,12 @@ const Contact = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaxi
           <ContactItem href="https://github.com/1300Sarthak" target="_blank" rel="noopener noreferrer"><FaGithub /> github.com/1300Sarthak</ContactItem>
           <ContactItem href="https://linkedin.com/in/sarsethi" target="_blank" rel="noopener noreferrer"><FaLinkedin /> linkedin.com/in/sarsethi</ContactItem>
         </ContactList>
-        <Form>
-          <Input type="text" placeholder="Your Name" />
-          <Input type="email" placeholder="Your Email" />
-          <Textarea placeholder="Your Message" />
-          <SendButton type="submit">Send Message</SendButton>
+        <Form onSubmit={handleSubmit} autoComplete="off">
+          <Input name="name" type="text" placeholder="Your Name" value={form.name} onChange={handleChange} required />
+          <Input name="email" type="email" placeholder="Your Email" value={form.email} onChange={handleChange} required />
+          <Textarea name="message" placeholder="Your Message" value={form.message} onChange={handleChange} required />
+          <SendButton type="submit" disabled={sending}>{sending ? 'Sending...' : 'Send Message'}</SendButton>
+          {status && <StatusMsg success={status.success}>{status.msg}</StatusMsg>}
         </Form>
       </Content>
     </WindowFrame>
