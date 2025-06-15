@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/Users/sarthak/sarthak-portfolio-migration/portfolio/old-html-site/backend/app.py", line 19, in <module>
-    raise ValueError(
-ValueError: Missing Supabase credentials. Please set SUPABASE_URL and SUPABASE_KEY environment variables.
