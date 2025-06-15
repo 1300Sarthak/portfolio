@@ -14,6 +14,7 @@ import Resume from './windows/Resume';
 import Photos from './windows/Photos';
 import NotificationBanner from './components/NotificationBanner';
 import Contact from './windows/Contact';
+import MobileWarning from './components/MobileWarning';
 
 const AppContainer = styled.div`
   width: 100vw;
@@ -239,6 +240,7 @@ const App = () => {
 
   return (
     <AppContainer>
+      <MobileWarning />
       <NotificationBanner
         image="/Screenshot 2025-06-14 at 6.11.55 PM.png"
         message="Hello there! My name is Sarthak, welcome to my site. Make sure to look around, and use the Text Message feature to get more detailed information about me."
