@@ -49,6 +49,12 @@ const TechTag = styled.span`
 
 const projects = [
   {
+    title: 'DataPulse',
+    link: 'https://github.com/1300Sarthak/DataPulse',
+    desc: 'Real-time dashboard aggregating crypto, stocks, weather, and news in one mobile-friendly interface. Built with React, FastAPI, and Supabase for seamless daily information access.',
+    tech: ['React', 'FastAPI', 'TypeScript', 'Redis', 'Supabase', 'Tailwind CSS', 'Docker', 'Chart.js', 'Python', 'PostgreSQL', 'REST API', 'GitHub Actions', 'Redis','Vercel','Render'],
+  },
+  {
     title: 'GovChat - 1st Place Winner at Microsoft Azure Hackathon for Public Sector',
     link: 'https://youtu.be/9DnK_Y8Fuiw',
     desc: 'MCP and RAG based chatbot',
