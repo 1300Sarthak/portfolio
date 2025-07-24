@@ -5,6 +5,11 @@ import { FaUser, FaCode, FaBlog, FaEnvelope, FaUsers, FaBriefcase, FaCertificate
 
 const DockContainer = styled(motion.div)`
   position: fixed;
+  /* To move the dock 300px to the left, change the next line to:
+     left: calc(50% - 300px);
+     To move it 300px to the right, use:
+     left: calc(50% + 300px);
+  */
   left: 50%;
   bottom: 12px;
   display: flex;

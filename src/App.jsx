@@ -101,6 +101,39 @@ const MenuItem = styled.div`
   }
 `;
 
+const menuDropdowns = {
+  File: ['New Window', 'New Tab', 'Open...', 'Close Window', 'Save', 'Save As...'],
+  Edit: ['Undo', 'Redo', 'Cut', 'Copy', 'Paste', 'Select All'],
+  View: ['Show All Tabs', 'Enter Full Screen', 'Show Sidebar'],
+  Window: ['Minimize', 'Zoom', 'Move Window to Left of Screen', 'Move Window to Right of Screen'],
+  Help: ['Search', 'macOS Help'],
+};
+
+const MenuDropdown = styled.div`
+  position: absolute;
+  top: 24px;
+  left: 0;
+  min-width: 140px;
+  background: rgba(255,255,255,0.98);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+  border-radius: 8px;
+  border: 1px solid rgba(200,200,200,0.18);
+  padding: 8px 0;
+  z-index: 2000;
+  font-size: 13px;
+  color: #222;
+  user-select: none;
+`;
+const MenuDropdownItem = styled.div`
+  padding: 6px 24px 6px 18px;
+  cursor: default;
+  opacity: 0.85;
+  &:hover {
+    background: #f0f0f0;
+    opacity: 1;
+  }
+`;
+
 const initialWindowState = {
   about: { open: false, minimized: false, maximized: false },
   club: { open: false, minimized: false, maximized: false },
@@ -128,6 +161,7 @@ const App = () => {
   const [windows, setWindows] = useState(initialWindowState);
   const [windowPositions, setWindowPositions] = useState({});
   const [zOrder, setZOrder] = useState([]);
+  const [openMenu, setOpenMenu] = useState(null);
 
   const getZIndex = (windowId) => {
     const idx = zOrder.indexOf(windowId);
@@ -251,12 +285,29 @@ const App = () => {
         <Subtitle>Computer Science &amp; Applied Math Student</Subtitle>
       </Overlay>
       <MenuBar>
-        <MenuItem>🍎</MenuItem>
-        <MenuItem>File</MenuItem>
-        <MenuItem>Edit</MenuItem>
-        <MenuItem>View</MenuItem>
-        <MenuItem>Window</MenuItem>
-        <MenuItem>Help</MenuItem>
+        <MenuItem onClick={() => handleWindowSelect('about')}>🍎</MenuItem>
+        {['File', 'Edit', 'View', 'Window', 'Help'].map((menu) => (
+          <div key={menu} style={{ position: 'relative' }}>
+            <MenuItem
+              onMouseEnter={() => setOpenMenu(menu)}
+              onMouseLeave={() => setOpenMenu(null)}
+              onClick={() => setOpenMenu(openMenu === menu ? null : menu)}
+              style={{ userSelect: 'none' }}
+            >
+              {menu}
+            </MenuItem>
+            {openMenu === menu && (
+              <MenuDropdown
+                onMouseEnter={() => setOpenMenu(menu)}
+                onMouseLeave={() => setOpenMenu(null)}
+              >
+                {menuDropdowns[menu].map((item, idx) => (
+                  <MenuDropdownItem key={idx}>{item}</MenuDropdownItem>
+                ))}
+              </MenuDropdown>
+            )}
+          </div>
+        ))}
       </MenuBar>
       <DesktopIconsColumn>
         {desktopIcons.map((icon) => (
