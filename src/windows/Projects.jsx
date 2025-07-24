@@ -49,6 +49,14 @@ const TechTag = styled.span`
 
 const projects = [
   {
+    title: 'SmartQuery',
+    link: 'https://github.com/tanzilahmed0/SmartQuery',
+    desc: 'SmartQuery is a full-stack application that lets users upload CSV files and query them using natural language. Built with Next.js 14 (TypeScript), Tailwind CSS, and DaisyUI on the frontend, and FastAPI, PostgreSQL, Redis, MinIO, and Celery on the backend. Features include Google OAuth authentication, JWT session management, async CSV processing and schema analysis, robust API client with retry logic, and comprehensive integration testing. The system supports file upload via presigned URLs, automatic schema analysis, and instant data visualization with Recharts. CI/CD is managed with GitHub Actions, and the infrastructure is containerized with Docker Compose.',
+    tech: [
+      'Next.js 14', 'TypeScript', 'Tailwind CSS', 'DaisyUI', 'Zustand', 'Recharts', 'Axios', 'FastAPI', 'Python', 'PostgreSQL', 'Redis', 'MinIO', 'Celery', 'Docker', 'GitHub Actions', 'Google OAuth', 'JWT', 'Vitest', 'Playwright', 'CI/CD'
+    ],
+  },
+  {
     title: 'DataPulse',
     link: 'https://github.com/1300Sarthak/DataPulse',
     desc: 'Real-time dashboard aggregating crypto, stocks, weather, and news in one mobile-friendly interface. Built with React, FastAPI, and Supabase for seamless daily information access.',
