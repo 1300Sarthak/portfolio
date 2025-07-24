@@ -70,7 +70,7 @@ const certificates = [
 
 const Certificates = (props) => (
   <WindowFrame title="Certificates" {...props}>
-    <h2>Certificates</h2>
+    <h2 style={{ color: '#111' }}>Certificates</h2>
     <CardGrid>
       {certificates.map((cert, i) => (
         <Card key={i}>

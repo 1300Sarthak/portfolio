@@ -33,7 +33,7 @@ const fakeBlog = [
 
 const Blog = (props) => (
   <WindowFrame title="Blog" {...props}>
-    <h2>Blog</h2>
+    <h2 style={{ color: '#111' }}>Blog</h2>
     <CardGrid>
       {fakeBlog.map((post, i) => (
         <Card key={i} href={post.link} target="_blank" rel="noopener noreferrer">
