@@ -33,7 +33,7 @@ const fakeClubs = [
 
 const Club = (props) => (
   <WindowFrame title="Club & Leadership" {...props}>
-    <h2>Club & Leadership</h2>
+    <h2 style={{ color: '#111' }}>Club & Leadership</h2>
     <CardGrid>
       {fakeClubs.map((club, i) => (
         <Card key={i} href={club.link} target="_blank" rel="noopener noreferrer">

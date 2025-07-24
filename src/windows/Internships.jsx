@@ -68,7 +68,7 @@ const internships = [
 
 const Internships = (props) => (
   <WindowFrame title="Internships" {...props}>
-    <h2>Internships</h2>
+    <h2 style={{ color: '#111' }}>Internships</h2>
     <CardGrid>
       {internships.map((intern, i) => (
         <Card key={i}>

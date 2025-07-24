@@ -124,7 +124,7 @@ const projects = [
 
 const Projects = (props) => (
   <WindowFrame title="Projects" {...props}>
-    <h2>Projects</h2>
+    <h2 style={{ color: '#111' }}>Projects</h2>
     <CardGrid>
       {projects.map((project, i) => (
         <Card key={i} href={project.link} target="_blank" rel="noopener noreferrer">

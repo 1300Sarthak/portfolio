@@ -48,7 +48,7 @@ const skillsData = [
 
 const Skills = (props) => (
   <WindowFrame title="Skills" {...props}>
-    <h2>Skills</h2>
+    <h2 style={{ color: '#111' }}>Skills</h2>
     <CardGrid>
       {skillsData.map((skill, i) => (
         <Card key={i}>
