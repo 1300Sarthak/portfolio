@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import Dock from './components/Dock';
 import DesktopIcon from './components/DesktopIcon';
@@ -162,6 +162,37 @@ const App = () => {
   const [windowPositions, setWindowPositions] = useState({});
   const [zOrder, setZOrder] = useState([]);
   const [openMenu, setOpenMenu] = useState(null);
+
+  // Handle GitHub Pages routing
+  useEffect(() => {
+    const redirectPath = sessionStorage.getItem('redirectPath');
+    if (redirectPath) {
+      sessionStorage.removeItem('redirectPath');
+      
+      // Map paths to window IDs
+      const pathToWindow = {
+        '/Resume': 'resume',
+        '/About': 'about',
+        '/Projects': 'projects',
+        '/Skills': 'skills',
+        '/Internships': 'internships',
+        '/Certificates': 'certificates',
+        '/Blog': 'blog',
+        '/Chatbot': 'chatbot',
+        '/Photos': 'photos',
+        '/Contact': 'contact',
+        '/Club': 'club'
+      };
+      
+      const windowId = pathToWindow[redirectPath];
+      if (windowId) {
+        // Small delay to ensure the app is fully loaded
+        setTimeout(() => {
+          handleWindowSelect(windowId);
+        }, 100);
+      }
+    }
+  }, []);
 
   const getZIndex = (windowId) => {
     const idx = zOrder.indexOf(windowId);
