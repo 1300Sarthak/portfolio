@@ -103,8 +103,8 @@ function linkify(text) {
 
 const Chatbot = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximize, onRestore, defaultPosition }) => {
   const [messages, setMessages] = useState([
-    { from: 'bot', text: 'Hi! I am Sarthak Sethi, what would you like to learn about me?' },
-    { from: 'bot', text: '⚠️ Note: This chatbot runs on a free server, so responses may take up to 2 minutes. Thank you for your patience!' }
+    { from: 'bot', text: '⚠️ Note: This chatbot runs on a free server, so responses may take up to 2 minutes. Thank you for your patience!' },
+    { from: 'bot', text: 'Hi! I am Sarthak Sethi, what would you like to learn about me?' }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);

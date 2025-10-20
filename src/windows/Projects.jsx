@@ -2,26 +2,49 @@ import React from 'react';
 import WindowFrame from '../components/WindowFrame';
 import styled from '@emotion/styled';
 
+const Content = styled.div`
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  background: #f6f6f6;
+  padding: 32px;
+  height: 100%;
+  overflow-y: auto;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin: 0 0 8px 0;
+  text-align: center;
+`;
+
+const SectionSubtitle = styled.p`
+  font-size: 1.1rem;
+  color: #86868b;
+  text-align: center;
+  margin: 0 0 32px 0;
+`;
+
 const CardGrid = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 12px;
+  gap: 20px;
 `;
 const Card = styled.a`
   display: block;
-  background: rgba(255,245,255,0.95);
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-  padding: 18px 20px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 24px;
   color: #222;
   text-decoration: none;
   font-weight: 500;
-  transition: box-shadow 0.18s, background 0.18s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   border: 1px solid #e0e0e0;
   &:hover {
-    background: #f5eaff;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
   }
 `;
 const ProjectTitle = styled.div`
@@ -32,6 +55,7 @@ const ProjectDesc = styled.div`
   font-size: 0.97rem;
   color: #444;
   margin: 6px 0 8px 0;
+  line-height: 1.6;
 `;
 const ProjectTech = styled.div`
   display: flex;
@@ -40,11 +64,13 @@ const ProjectTech = styled.div`
   margin-top: 4px;
 `;
 const TechTag = styled.span`
-  background: #e0e0ff;
+  background: #f2f2f7;
   color: #333;
-  border-radius: 6px;
-  padding: 2px 8px;
-  font-size: 0.93rem;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid #e5e5e7;
 `;
 
 const projects = [
@@ -67,6 +93,12 @@ const projects = [
     link: 'https://youtu.be/9DnK_Y8Fuiw',
     desc: 'MCP and RAG based chatbot',
     tech: ['RAG', 'MCP', 'LLM', 'React.JS', 'Python', 'Django', 'Azure'],
+  },
+  {
+    title: 'Agentic AI-Powered MCP Agent Competitive Intelligence Task Force — 3rd Place Winner at MCP Hackathon',
+    link: '#',
+    desc: 'Built full-stack multi-agent AI platform with Bright Data MCP and LlamaIndex to automate research, generate department-specific analyses, and deliver executive-ready insights through real-time dashboards.',
+    tech: ['Multi-Agent AI', 'MCP', 'LlamaIndex', 'Bright Data', 'Real-time Dashboards', 'Competitive Intelligence'],
   },
   {
     title: 'SJFit - 2nd Place Winner at Silicon Hacks',
@@ -131,21 +163,24 @@ const projects = [
 ];
 
 const Projects = (props) => (
-  <WindowFrame title="Projects" {...props}>
-    <h2 style={{ color: '#111' }}>Projects</h2>
-    <CardGrid>
-      {projects.map((project, i) => (
-        <Card key={i} href={project.link} target="_blank" rel="noopener noreferrer">
-          <ProjectTitle>{project.title}</ProjectTitle>
-          <ProjectDesc>{project.desc}</ProjectDesc>
-          <ProjectTech>
-            {project.tech.map((t, j) => (
-              <TechTag key={j}>{t}</TechTag>
-            ))}
-          </ProjectTech>
-        </Card>
-      ))}
-    </CardGrid>
+  <WindowFrame title="Projects" {...props} defaultSize={{ width: 1000, height: 700 }}>
+    <Content>
+      <SectionTitle>Projects</SectionTitle>
+      <SectionSubtitle>A showcase of my development work and achievements</SectionSubtitle>
+      <CardGrid>
+        {projects.map((project, i) => (
+          <Card key={i} href={project.link} target="_blank" rel="noopener noreferrer">
+            <ProjectTitle>{project.title}</ProjectTitle>
+            <ProjectDesc>{project.desc}</ProjectDesc>
+            <ProjectTech>
+              {project.tech.map((t, j) => (
+                <TechTag key={j}>{t}</TechTag>
+              ))}
+            </ProjectTech>
+          </Card>
+        ))}
+      </CardGrid>
+    </Content>
   </WindowFrame>
 );
 

@@ -1,4 +1,3 @@
-// CACHE BUSTER v2.0 - NEW DESIGN
 import React from 'react';
 import styled from '@emotion/styled';
 import WindowFrame from '../components/WindowFrame';

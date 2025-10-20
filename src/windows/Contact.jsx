@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import WindowFrame from '../components/WindowFrame';
 import styled from '@emotion/styled';
-import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaEnvelope, FaGithub, FaLinkedin, FaCalendarAlt } from 'react-icons/fa';
 
 const Content = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -127,6 +127,7 @@ const Contact = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaxi
           I'm always interested in new opportunities and collaborations. Feel free to reach out!
         </Summary>
         <ContactList>
+          <ContactItem href="https://cal.com/sxthak" target="_blank" rel="noopener noreferrer"><FaCalendarAlt /> Schedule a Meeting - cal.com/sxthak</ContactItem>
           <ContactItem href="mailto:sarthakluv@gmail.com" target="_blank" rel="noopener noreferrer"><FaEnvelope /> sarthakluv@gmail.com</ContactItem>
           <ContactItem href="https://github.com/1300Sarthak" target="_blank" rel="noopener noreferrer"><FaGithub /> github.com/1300Sarthak</ContactItem>
           <ContactItem href="https://linkedin.com/in/sarsethi" target="_blank" rel="noopener noreferrer"><FaLinkedin /> linkedin.com/in/sarsethi</ContactItem>
