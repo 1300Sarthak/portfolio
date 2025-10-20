@@ -8,10 +8,12 @@ import Internships from './windows/Internships';
 import Certificates from './windows/Certificates';
 import Projects from './windows/Projects';
 import Skills from './windows/Skills';
-import Blog from './windows/Blog';
 import Chatbot from './windows/Chatbot';
 import Resume from './windows/Resume';
-import Photos from './windows/Photos';
+import HackathonWins from './windows/HackathonWins';
+import Experience from './windows/Experience';
+import Stories from './windows/Stories';
+import Finder from './windows/Finder';
 import NotificationBanner from './components/NotificationBanner';
 import Contact from './windows/Contact';
 import MobileWarning from './components/MobileWarning';
@@ -141,10 +143,12 @@ const initialWindowState = {
   certificates: { open: false, minimized: false, maximized: false },
   projects: { open: false, minimized: false, maximized: false },
   skills: { open: false, minimized: false, maximized: false },
-  blog: { open: false, minimized: false, maximized: false },
   chatbot: { open: false, minimized: false, maximized: false },
   resume: { open: false, minimized: false, maximized: false },
-  photos: { open: false, minimized: false, maximized: false },
+  hackathonwins: { open: false, minimized: false, maximized: false },
+  experience: { open: false, minimized: false, maximized: false },
+  stories: { open: false, minimized: false, maximized: false },
+  finder: { open: false, minimized: false, maximized: false },
   contact: { open: false, minimized: false, maximized: false },
 };
 
@@ -179,7 +183,6 @@ const App = () => {
         '/Certificates': 'certificates',
         '/Blog': 'blog',
         '/Chatbot': 'chatbot',
-        '/Photos': 'photos',
         '/Contact': 'contact',
         '/Club': 'club'
       };
@@ -290,12 +293,6 @@ const App = () => {
       position: { x: 20, y: 380 }
     },
     {
-      type: 'photos',
-      label: 'Photos',
-      onClick: () => handleWindowSelect('photos'),
-      position: { x: 20, y: 500 }
-    },
-    {
       type: 'contact',
       label: 'Contact',
       onClick: () => handleWindowSelect('contact'),
@@ -307,7 +304,7 @@ const App = () => {
     <AppContainer>
       <MobileWarning />
       <NotificationBanner
-        image="/Screenshot 2025-06-14 at 6.11.55 PM.png"
+        image="/me.jpg"
         message="Hello there! My name is Sarthak, welcome to my site. Make sure to look around, and use the Text Message feature to get more detailed information about me."
         duration={15000}
       />
@@ -418,18 +415,6 @@ const App = () => {
         style={{ zIndex: getZIndex('skills') }}
         onMouseDown={() => bringToFront('skills')}
       />
-      <Blog
-        isOpen={windows.blog.open}
-        isMinimized={windows.blog.minimized}
-        isMaximized={windows.blog.maximized}
-        onClose={() => handleWindowClose('blog')}
-        onMinimize={() => handleWindowMinimize('blog')}
-        onMaximize={() => handleWindowMaximize('blog')}
-        onRestore={() => handleWindowRestore('blog')}
-        defaultPosition={windowPositions.blog || { x: 220, y: 220 }}
-        style={{ zIndex: getZIndex('blog') }}
-        onMouseDown={() => bringToFront('blog')}
-      />
       <Chatbot
         isOpen={windows.chatbot.open}
         isMinimized={windows.chatbot.minimized}
@@ -455,17 +440,53 @@ const App = () => {
         style={{ zIndex: getZIndex('resume') }}
         onMouseDown={() => bringToFront('resume')}
       />
-      <Photos
-        isOpen={windows.photos.open}
-        isMinimized={windows.photos.minimized}
-        isMaximized={windows.photos.maximized}
-        onClose={() => handleWindowClose('photos')}
-        onMinimize={() => handleWindowMinimize('photos')}
-        onMaximize={() => handleWindowMaximize('photos')}
-        onRestore={() => handleWindowRestore('photos')}
-        defaultPosition={windowPositions.photos || { x: 280, y: 280 }}
-        style={{ zIndex: getZIndex('photos') }}
-        onMouseDown={() => bringToFront('photos')}
+      <HackathonWins
+        isOpen={windows.hackathonwins.open}
+        isMinimized={windows.hackathonwins.minimized}
+        isMaximized={windows.hackathonwins.maximized}
+        onClose={() => handleWindowClose('hackathonwins')}
+        onMinimize={() => handleWindowMinimize('hackathonwins')}
+        onMaximize={() => handleWindowMaximize('hackathonwins')}
+        onRestore={() => handleWindowRestore('hackathonwins')}
+        defaultPosition={windowPositions.hackathonwins || { x: 340, y: 340 }}
+        style={{ zIndex: getZIndex('hackathonwins') }}
+        onMouseDown={() => bringToFront('hackathonwins')}
+      />
+      <Experience
+        isOpen={windows.experience.open}
+        isMinimized={windows.experience.minimized}
+        isMaximized={windows.experience.maximized}
+        onClose={() => handleWindowClose('experience')}
+        onMinimize={() => handleWindowMinimize('experience')}
+        onMaximize={() => handleWindowMaximize('experience')}
+        onRestore={() => handleWindowRestore('experience')}
+        defaultPosition={windowPositions.experience || { x: 380, y: 380 }}
+        style={{ zIndex: getZIndex('experience') }}
+        onMouseDown={() => bringToFront('experience')}
+      />
+      <Stories
+        isOpen={windows.stories.open}
+        isMinimized={windows.stories.minimized}
+        isMaximized={windows.stories.maximized}
+        onClose={() => handleWindowClose('stories')}
+        onMinimize={() => handleWindowMinimize('stories')}
+        onMaximize={() => handleWindowMaximize('stories')}
+        onRestore={() => handleWindowRestore('stories')}
+        defaultPosition={windowPositions.stories || { x: 420, y: 420 }}
+        style={{ zIndex: getZIndex('stories') }}
+        onMouseDown={() => bringToFront('stories')}
+      />
+      <Finder
+        isOpen={windows.finder.open}
+        isMinimized={windows.finder.minimized}
+        isMaximized={windows.finder.maximized}
+        onClose={() => handleWindowClose('finder')}
+        onMinimize={() => handleWindowMinimize('finder')}
+        onMaximize={() => handleWindowMaximize('finder')}
+        onRestore={() => handleWindowRestore('finder')}
+        defaultPosition={windowPositions.finder || { x: 460, y: 460 }}
+        style={{ zIndex: getZIndex('finder') }}
+        onMouseDown={() => bringToFront('finder')}
       />
       <Contact
         isOpen={windows.contact.open}
