@@ -1,16 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaUser, FaCode, FaBlog, FaEnvelope, FaUsers, FaBriefcase, FaCertificate, FaTools, FaStar } from 'react-icons/fa';
+import { FaUser, FaCode, FaBlog, FaUsers, FaBriefcase, FaTools, FaStar, FaTrophy, FaFolderOpen, FaHeart } from 'react-icons/fa';
 
 const DockContainer = styled(motion.div)`
   position: fixed;
-  /* To move the dock 300px to the left, change the next line to:
-     left: calc(50% - 300px);
-     To move it 300px to the right, use:
-     left: calc(50% + 300px);
-  */
-  left: 50%;
+  left: calc(50% - 150px);
   bottom: 12px;
   display: flex;
   gap: 4px;
@@ -96,13 +91,15 @@ const Dock = ({ activeWindow, onWindowSelect }) => {
   const iconRef = useRef(null);
   const dockItems = [
     { id: 'about', icon: <FaUser size={24} />, label: 'About Me' },
-    { id: 'club', icon: <FaUsers size={24} />, label: 'Club & Leadership' },
-    { id: 'internships', icon: <FaBriefcase size={24} />, label: 'Internships' },
-    { id: 'certificates', icon: <FaCertificate size={24} />, label: 'Certificates' },
     { id: 'projects', icon: <FaCode size={24} />, label: 'Projects' },
+    { id: 'hackathonwins', icon: <FaTrophy size={24} />, label: 'Hackathon Wins' },
+    { id: 'internships', icon: <FaBriefcase size={24} />, label: 'Internships' },
     { id: 'skills', icon: <FaTools size={24} />, label: 'Skills' },
+    { id: 'club', icon: <FaUsers size={24} />, label: 'Club & Leadership' },
+    { id: 'stories', icon: <FaStar size={24} />, label: 'Stories' },
+    { id: 'finder', icon: <FaFolderOpen size={24} />, label: 'Finder' },
     { id: 'blog', icon: <FaBlog size={24} />, label: 'Blog' },
-    { id: 'contact', icon: <FaEnvelope size={24} />, label: 'Contact' },
+    { id: 'personal', icon: <FaHeart size={24} />, label: 'Personal' },
   ];
 
   useEffect(() => {

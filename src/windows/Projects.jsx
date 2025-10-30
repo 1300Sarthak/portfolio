@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 const Content = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
-  background: #f6f6f6;
+  background: #f5f5f7;
   padding: 32px;
   height: 100%;
   overflow-y: auto;
@@ -12,68 +12,112 @@ const Content = styled.div`
 
 const SectionTitle = styled.h2`
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #1d1d1f;
   margin: 0 0 8px 0;
   text-align: center;
+  letter-spacing: -0.5px;
 `;
 
 const SectionSubtitle = styled.p`
-  font-size: 1.1rem;
-  color: #86868b;
+  font-size: 1rem;
+  color: #6e6e73;
   text-align: center;
   margin: 0 0 32px 0;
+  font-weight: 400;
 `;
 
 const CardGrid = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 `;
 const Card = styled.a`
   display: block;
-  background: rgba(255,255,255,0.95);
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   padding: 24px;
-  color: #222;
+  color: #1d1d1f;
   text-decoration: none;
-  font-weight: 500;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid #e0e0e0;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0,0,0,0.04);
   &:hover {
-    background: #f8f9fa;
+    background: white;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
   }
 `;
-const ProjectTitle = styled.div`
-  font-size: 1.1rem;
+const ProjectHeader = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 8px;
+`;
+const ProjectNumber = styled.div`
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #007AFF 0%, #0051D5 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
   font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.25);
+`;
+const ProjectTitle = styled.div`
+  flex: 1;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1d1d1f;
+  line-height: 1.4;
+  letter-spacing: -0.2px;
 `;
 const ProjectDesc = styled.div`
-  font-size: 0.97rem;
-  color: #444;
-  margin: 6px 0 8px 0;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  color: #6e6e73;
+  margin: 8px 0 12px 0;
+  line-height: 1.5;
+  font-weight: 400;
 `;
 const ProjectTech = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 4px;
+  gap: 6px;
+  margin-top: 8px;
 `;
 const TechTag = styled.span`
-  background: #f2f2f7;
-  color: #333;
-  border-radius: 8px;
-  padding: 6px 12px;
-  font-size: 0.9rem;
+  background: #f5f5f7;
+  color: #1d1d1f;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.85rem;
   font-weight: 500;
-  border: 1px solid #e5e5e7;
+  border: 1px solid rgba(0,0,0,0.06);
 `;
 
 const projects = [
+  {
+    title: 'Info-Ninja: AI-Powered Competitive Intelligence Platform - 3rd Place Winner at MCP Hackathon',
+    link: 'https://github.com/1300Sarthak/mcp-hackathon-sf',
+    desc: 'Multi-agent AI platform delivering executive-ready competitive intelligence in minutes. Features department-specific analysis (IT, Sales, Marketing, etc.), real-time visualizations with interactive dashboards, Redis caching achieving 90% cost reduction and 600x speed improvement, and Bright Data MCP integration for diverse web scraping across 10+ source types. Built with React, FastAPI, Google Gemini 2.0, LlamaIndex, and enterprise-grade Redis caching with intelligent TTL management.',
+    tech: ['Multi-Agent AI', 'MCP', 'LlamaIndex', 'Bright Data', 'Redis', 'FastAPI', 'React', 'TypeScript', 'Tailwind CSS', 'Recharts', 'Google Gemini 2.0', 'Docker', 'SSE'],
+  },
+  {
+    title: 'AI-CAD: Cursor for Architecture',
+    link: 'https://github.com/1300Sarthak/AI-CAD',
+    desc: '3D web application for architectural design using natural language commands with real-time daylight simulation. Features drag-and-drop block editing with transform controls, AI-powered command parsing via OpenAI GPT-4, live 3D compass navigation with cardinal directions, intelligent grid snapping (0.5m default), AI layout assistant for automatic alignment and spacing, full undo/redo with 50-step history, and real-time sun positioning for shadow simulation. Built with React Three Fiber, Three.js, FastAPI, and Tailwind CSS.',
+    tech: ['React', 'Three.js', 'React Three Fiber', 'FastAPI', 'OpenAI GPT-4', 'Vite', 'Tailwind CSS', 'Python', 'TypeScript', 'Pydantic', 'Web Speech API'],
+  },
+  {
+    title: 'Unfiltered LLM - Oracle Cloud Deployed',
+    link: 'https://github.com/1300Sarthak/unfilteredllm',
+    desc: 'Oracle Cloud deployed large language model with no content filtering or restrictions. Full-stack implementation featuring enterprise cloud infrastructure, unrestricted AI responses, and production-grade deployment on Oracle Cloud infrastructure.',
+    tech: ['Oracle Cloud', 'LLM', 'Python', 'Cloud Deployment', 'FastAPI', 'Docker'],
+  },
   {
     title: 'SmartQuery',
     link: 'https://github.com/tanzilahmed0/SmartQuery',
@@ -93,12 +137,6 @@ const projects = [
     link: 'https://youtu.be/9DnK_Y8Fuiw',
     desc: 'MCP and RAG based chatbot',
     tech: ['RAG', 'MCP', 'LLM', 'React.JS', 'Python', 'Django', 'Azure'],
-  },
-  {
-    title: 'Agentic AI-Powered MCP Agent Competitive Intelligence Task Force — 3rd Place Winner at MCP Hackathon',
-    link: '#',
-    desc: 'Built full-stack multi-agent AI platform with Bright Data MCP and LlamaIndex to automate research, generate department-specific analyses, and deliver executive-ready insights through real-time dashboards.',
-    tech: ['Multi-Agent AI', 'MCP', 'LlamaIndex', 'Bright Data', 'Real-time Dashboards', 'Competitive Intelligence'],
   },
   {
     title: 'SJFit - 2nd Place Winner at Silicon Hacks',
@@ -166,11 +204,14 @@ const Projects = (props) => (
   <WindowFrame title="Projects" {...props} defaultSize={{ width: 1000, height: 700 }}>
     <Content>
       <SectionTitle>Projects</SectionTitle>
-      <SectionSubtitle>A showcase of my development work and achievements</SectionSubtitle>
+      <SectionSubtitle>A showcase of my development work and achievements • {projects.length} total projects</SectionSubtitle>
       <CardGrid>
         {projects.map((project, i) => (
           <Card key={i} href={project.link} target="_blank" rel="noopener noreferrer">
-            <ProjectTitle>{project.title}</ProjectTitle>
+            <ProjectHeader>
+              <ProjectNumber>{i + 1}</ProjectNumber>
+              <ProjectTitle>{project.title}</ProjectTitle>
+            </ProjectHeader>
             <ProjectDesc>{project.desc}</ProjectDesc>
             <ProjectTech>
               {project.tech.map((t, j) => (

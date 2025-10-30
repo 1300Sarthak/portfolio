@@ -5,15 +5,16 @@ import DesktopIcon from './components/DesktopIcon';
 import About from './windows/About';
 import Club from './windows/Club';
 import Internships from './windows/Internships';
-import Certificates from './windows/Certificates';
 import Projects from './windows/Projects';
 import Skills from './windows/Skills';
 import Chatbot from './windows/Chatbot';
 import Resume from './windows/Resume';
 import HackathonWins from './windows/HackathonWins';
 import Experience from './windows/Experience';
+import Photos from './windows/Photos';
 import Stories from './windows/Stories';
 import Finder from './windows/Finder';
+import Personal from './windows/Personal';
 import NotificationBanner from './components/NotificationBanner';
 import Contact from './windows/Contact';
 import MobileWarning from './components/MobileWarning';
@@ -140,7 +141,6 @@ const initialWindowState = {
   about: { open: false, minimized: false, maximized: false },
   club: { open: false, minimized: false, maximized: false },
   internships: { open: false, minimized: false, maximized: false },
-  certificates: { open: false, minimized: false, maximized: false },
   projects: { open: false, minimized: false, maximized: false },
   skills: { open: false, minimized: false, maximized: false },
   chatbot: { open: false, minimized: false, maximized: false },
@@ -150,6 +150,8 @@ const initialWindowState = {
   stories: { open: false, minimized: false, maximized: false },
   finder: { open: false, minimized: false, maximized: false },
   contact: { open: false, minimized: false, maximized: false },
+  photos: { open: false, minimized: false, maximized: false },
+  personal: { open: false, minimized: false, maximized: false },
 };
 
 function getRandomPosition() {
@@ -180,7 +182,6 @@ const App = () => {
         '/Projects': 'projects',
         '/Skills': 'skills',
         '/Internships': 'internships',
-        '/Certificates': 'certificates',
         '/Blog': 'blog',
         '/Chatbot': 'chatbot',
         '/Contact': 'contact',
@@ -293,6 +294,12 @@ const App = () => {
       position: { x: 20, y: 380 }
     },
     {
+      type: 'photos',
+      label: 'Photos',
+      onClick: () => handleWindowSelect('photos'),
+      position: { x: 20, y: 500 }
+    },
+    {
       type: 'contact',
       label: 'Contact',
       onClick: () => handleWindowSelect('contact'),
@@ -378,18 +385,6 @@ const App = () => {
         defaultPosition={windowPositions.internships || { x: 140, y: 140 }}
         style={{ zIndex: getZIndex('internships') }}
         onMouseDown={() => bringToFront('internships')}
-      />
-      <Certificates
-        isOpen={windows.certificates.open}
-        isMinimized={windows.certificates.minimized}
-        isMaximized={windows.certificates.maximized}
-        onClose={() => handleWindowClose('certificates')}
-        onMinimize={() => handleWindowMinimize('certificates')}
-        onMaximize={() => handleWindowMaximize('certificates')}
-        onRestore={() => handleWindowRestore('certificates')}
-        defaultPosition={windowPositions.certificates || { x: 160, y: 160 }}
-        style={{ zIndex: getZIndex('certificates') }}
-        onMouseDown={() => bringToFront('certificates')}
       />
       <Projects
         isOpen={windows.projects.open}
@@ -488,6 +483,18 @@ const App = () => {
         style={{ zIndex: getZIndex('finder') }}
         onMouseDown={() => bringToFront('finder')}
       />
+      <Photos
+        isOpen={windows.photos.open}
+        isMinimized={windows.photos.minimized}
+        isMaximized={windows.photos.maximized}
+        onClose={() => handleWindowClose('photos')}
+        onMinimize={() => handleWindowMinimize('photos')}
+        onMaximize={() => handleWindowMaximize('photos')}
+        onRestore={() => handleWindowRestore('photos')}
+        defaultPosition={windowPositions.photos || { x: 500, y: 300 }}
+        style={{ zIndex: getZIndex('photos') }}
+        onMouseDown={() => bringToFront('photos')}
+      />
       <Contact
         isOpen={windows.contact.open}
         isMinimized={windows.contact.minimized}
@@ -499,6 +506,18 @@ const App = () => {
         defaultPosition={windowPositions.contact || { x: 320, y: 320 }}
         style={{ zIndex: getZIndex('contact') }}
         onMouseDown={() => bringToFront('contact')}
+      />
+      <Personal
+        isOpen={windows.personal.open}
+        isMinimized={windows.personal.minimized}
+        isMaximized={windows.personal.maximized}
+        onClose={() => handleWindowClose('personal')}
+        onMinimize={() => handleWindowMinimize('personal')}
+        onMaximize={() => handleWindowMaximize('personal')}
+        onRestore={() => handleWindowRestore('personal')}
+        defaultPosition={windowPositions.personal || { x: 540, y: 340 }}
+        style={{ zIndex: getZIndex('personal') }}
+        onMouseDown={() => bringToFront('personal')}
       />
       <Dock
         activeWindow={Object.entries(windows).find(([, w]) => w.open && !w.minimized)?.[0]}

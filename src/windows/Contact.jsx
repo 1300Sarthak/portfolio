@@ -8,6 +8,8 @@ const Content = styled.div`
   color: #222;
   padding: 32px 32px 24px 32px;
   min-width: 420px;
+  height: 100%;
+  overflow-y: auto;
 `;
 const Heading = styled.h2`
   font-size: 1.4rem;
@@ -119,7 +121,7 @@ const Contact = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaxi
       onMaximize={onMaximize}
       onRestore={onRestore}
       defaultPosition={defaultPosition}
-      defaultSize={{ width: 480, height: 420 }}
+      defaultSize={{ width: 520, height: 640 }}
     >
       <Content>
         <Heading>Get In Touch</Heading>
