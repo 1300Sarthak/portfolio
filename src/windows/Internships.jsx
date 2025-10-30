@@ -97,6 +97,14 @@ const TechTag = styled.span`
 
 const internships = [
   {
+    title: 'Incoming Software Engineering Intern',
+    company: 'Shopify',
+    location: 'Bellevue, WA',
+    duration: 'May 2026 – Aug 2026',
+    desc: 'Incoming software engineering intern at Shopify.',
+    tech: ['Unknown'],
+  },
+  {
     title: 'Software Engineering Intern',
     company: 'Gilead Sciences',
     location: 'Foster City, CA',
