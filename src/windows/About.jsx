@@ -159,7 +159,7 @@ const SkillTag = styled.span`
   border: 1px solid #e5e5e7;
 `;
 
-const About = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximize, onRestore, defaultPosition }) => {
+const About = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximize, onRestore, defaultPosition, isMobile }) => {
   return (
     <WindowFrame
       title="About This Developer"
@@ -172,6 +172,7 @@ const About = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximi
       onRestore={onRestore}
       defaultPosition={defaultPosition}
       defaultSize={{ width: 700, height: 650 }}
+      isMobile={isMobile}
     >
       <Content>
         <ProfilePhoto src="/me.jpg" alt="Sarthak Sethi" />

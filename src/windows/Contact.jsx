@@ -78,7 +78,7 @@ const StatusMsg = styled.div`
   color: ${props => props.success ? '#28c940' : '#ff3b30'};
 `;
 
-const Contact = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximize, onRestore, defaultPosition }) => {
+const Contact = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximize, onRestore, defaultPosition, isMobile }) => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState(null);
   const [sending, setSending] = useState(false);
@@ -122,6 +122,7 @@ const Contact = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaxi
       onRestore={onRestore}
       defaultPosition={defaultPosition}
       defaultSize={{ width: 520, height: 640 }}
+      isMobile={isMobile}
     >
       <Content>
         <Heading>Get In Touch</Heading>

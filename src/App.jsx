@@ -17,7 +17,19 @@ import Finder from './windows/Finder';
 import Personal from './windows/Personal';
 import NotificationBanner from './components/NotificationBanner';
 import Contact from './windows/Contact';
-import MobileWarning from './components/MobileWarning';
+import MobileApp from './components/mobile/MobileApp';
+
+const useMobile = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return isMobile;
+};
 
 const AppContainer = styled.div`
   width: 100vw;
@@ -164,6 +176,7 @@ function getRandomPosition() {
 }
 
 const App = () => {
+  const isMobile = useMobile();
   const [windows, setWindows] = useState(initialWindowState);
   const [windowPositions, setWindowPositions] = useState({});
   const [zOrder, setZOrder] = useState([]);
@@ -307,9 +320,12 @@ const App = () => {
     }
   ];
 
+  if (isMobile) {
+    return <MobileApp />;
+  }
+
   return (
     <AppContainer>
-      <MobileWarning />
       <NotificationBanner
         image="/me.jpg"
         message="Hello there! My name is Sarthak, welcome to my site. Make sure to look around, and use the Text Message feature to get more detailed information about me."

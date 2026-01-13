@@ -101,7 +101,7 @@ function linkify(text) {
   );
 }
 
-const Chatbot = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximize, onRestore, defaultPosition }) => {
+const Chatbot = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximize, onRestore, defaultPosition, isMobile }) => {
   const [messages, setMessages] = useState([
     { from: 'bot', text: '⚠️ Note: This chatbot runs on a free server, so responses may take up to 2 minutes. Thank you for your patience!' },
     { from: 'bot', text: 'Hi! I am Sarthak Sethi, what would you like to learn about me?' }
@@ -149,6 +149,7 @@ const Chatbot = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaxi
       onRestore={onRestore}
       defaultPosition={defaultPosition}
       defaultSize={{ width: 420, height: 500 }}
+      isMobile={isMobile}
     >
       <WindowContent>
         <ChatArea ref={chatRef}>

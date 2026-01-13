@@ -106,6 +106,11 @@ const windowVariants = {
   exit: { opacity: 0, scale: 0.85, y: 40, transition: { duration: 0.18 } },
 };
 
+const MobileContent = styled.div`
+  background: #fff;
+  min-height: 100%;
+`;
+
 const WindowFrame = ({
   title,
   children,
@@ -118,9 +123,15 @@ const WindowFrame = ({
   onRestore,
   defaultPosition = { x: 100, y: 100 },
   defaultSize = { width: 600, height: 400 },
+  isMobile = false,
 }) => {
   const parentRef = useRef(null);
   if (!isOpen || isMinimized) return null;
+
+  // Mobile: render just the content without window chrome
+  if (isMobile) {
+    return <MobileContent>{children}</MobileContent>;
+  }
 
   // Calculate bounds for react-rnd
   const bounds = {

@@ -15,7 +15,7 @@ const ResumeFrame = styled.iframe`
   border: none;
 `;
 
-const Resume = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximize, onRestore, defaultPosition }) => {
+const Resume = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximize, onRestore, defaultPosition, isMobile }) => {
   return (
     <WindowFrame
       title="Resume"
@@ -28,6 +28,7 @@ const Resume = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaxim
       onRestore={onRestore}
       defaultPosition={defaultPosition}
       defaultSize={{ width: 800, height: 900 }}
+      isMobile={isMobile}
     >
       <ResumeContainer>
         <ResumeFrame src="/Resume.pdf" title="Resume" />

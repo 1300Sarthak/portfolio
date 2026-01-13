@@ -75,7 +75,7 @@ const photos = [
   // Add more photos as needed
 ];
 
-const Photos = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximize, onRestore, defaultPosition }) => {
+const Photos = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaximize, onRestore, defaultPosition, isMobile }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
@@ -102,6 +102,7 @@ const Photos = ({ isOpen, isMinimized, isMaximized, onClose, onMinimize, onMaxim
       onRestore={onRestore}
       defaultPosition={defaultPosition}
       defaultSize={{ width: 1000, height: 800 }}
+      isMobile={isMobile}
     >
       <PhotosContainer>
         <Photo src={photos[currentIndex]} alt={`Photo ${currentIndex + 1}`} />
